@@ -31,6 +31,7 @@ def make_ellipses(gmm, ax):
         ell.set_clip_box(ax.bbox)
         ell.set_alpha(0.5)
         ax.add_artist(ell)
+# below: iris data for my reference
 '''
 iris = datasets.load_iris()
 #print iris
@@ -49,14 +50,14 @@ y_test = iris.target[test_index]
 #is it randomized? ---> NO
 #len(y_train)=111, len(y_test)=39
 '''
+#get all filenames of npytxt files
 dirNames = ['cslu_fae_corpus/npytxt_avg/AR', 'cslu_fae_corpus/npytxt_avg/HI', 'cslu_fae_corpus/npytxt_avg/MA']
 files_AR = listdir(dirNames[0])
 files_HI= listdir(dirNames[1])
 files_MA = listdir(dirNames[2])
 all_files = files_AR + files_HI + files_MA
 
-# convert allFiles (holds list of fileNames) --> accents_data
-
+accents_target_names = ['Arabic', 'Hindi', 'Mandarin']
 # fill target with int. 0=Arabic, 1=Hindi, 2=Mandarin
 # fill data with PLP values for each file
 accents_target = []
@@ -64,41 +65,44 @@ accents_data = []
 for i in range(len(all_files)):
     if i < len(files_AR):
         accents_target.append(0)
-        with open(dirNames[0]+"/"+all_files[0]) as f:
+        with open(dirNames[0]+"/"+all_files[i]) as f:
             line = f.readline()
             one_row = line.split()
             one_row = [float(num) for num in one_row]
             accents_data.append(one_row)
     elif (i < (len(files_AR) + len(files_HI))):
         accents_target.append(1)
-        with open(dirNames[1]+"/"+all_files[1]) as f:
+        with open(dirNames[1]+"/"+all_files[i]) as f:
             line = f.readline()
             one_row = line.split()
             one_row = [float(num) for num in one_row]
             accents_data.append(one_row)
     else:
         accents_target.append(2)
-        with open(dirNames[2]+"/"+all_files[2]) as f:
+        with open(dirNames[2]+"/"+all_files[i]) as f:
             line = f.readline()
             one_row = line.split()
             one_row = [float(num) for num in one_row]
             accents_data.append(one_row)
-#print "accent data arabic: ", accents_data
 
 skf = StratifiedKFold(accents_target, n_folds=4)
 # Only take the first fold.
 train_index, test_index = next(iter(skf))
 
-X_train = accents_data[train_index]
-y_train = accents_target[train_index]
-X_test = accents_data[test_index]
-y_test = accents_target[test_index]
+#print "acc data: ", accents_data
+#print "train index", train_index
+#print "train index at 2: ", train_index[2]
+
+X_train = [accents_data[i] for i in train_index]
+y_train = [accents_target[i] for i in train_index]
+X_test = [accents_data[i] for i in test_index]
+y_test = [accents_target[i] for i in test_index]
 
 
-'''# IRIS CODE BELOW ***************
 n_classes = len(np.unique(y_train))
 
 # Try GMMs using different types of covariances.
+# EA: I hope this works without changing it
 classifiers = dict((covar_type, GMM(n_components=n_classes,
                     covariance_type=covar_type, init_params='wc', n_iter=20))
                    for covar_type in ['spherical', 'diag', 'tied', 'full'])
@@ -109,7 +113,8 @@ plt.figure(figsize=(3 * n_classifiers / 2, 6))
 plt.subplots_adjust(bottom=.01, top=0.95, hspace=.15, wspace=.05,
                     left=.01, right=.99)
 
-
+# I get AttributeError line 120: 'list' object has no attribute 'mean'... 
+# X_train has no 'mean' attribute?
 for index, (name, classifier) in enumerate(classifiers.items()):
     # Since we have class labels for the training data, we can
     # initialize the GMM parameters in a supervised manner.
@@ -117,15 +122,16 @@ for index, (name, classifier) in enumerate(classifiers.items()):
                                   for i in xrange(n_classes)])
 
     # Train the other parameters using the EM algorithm.
+    '''EA: What is EM?'''
     classifier.fit(X_train)
 
     h = plt.subplot(2, n_classifiers / 2, index + 1)
     make_ellipses(classifier, h)
 
     for n, color in enumerate('rgb'):
-        data = iris.data[iris.target == n]
+        data = accents_data[accents_target == n]
         plt.scatter(data[:, 0], data[:, 1], 0.8, color=color,
-                    label=iris.target_names[n])
+                    label=accents_target_names[n])
     # Plot the test data with crosses
     for n, color in enumerate('rgb'):
         data = X_test[y_test == n]
@@ -148,4 +154,4 @@ for index, (name, classifier) in enumerate(classifiers.items()):
 plt.legend(loc='lower right', prop=dict(size=12))
 
 
-plt.show()'''
+plt.show()
