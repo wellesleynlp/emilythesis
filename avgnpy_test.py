@@ -52,7 +52,7 @@ def writeOneDir(oldDir, newDir):
         
 
 #writeOneDir('cslu_fae_corpus/npytxt/AR', 'cslu_fae_corpus/npytxt_avg/AR')
-writeOneDir('cslu_fae_corpus/npytxt/MA', 'cslu_fae_corpus/npytxt_avg/MA')
-writeOneDir('cslu_fae_corpus/npytxt/HI', 'cslu_fae_corpus/npytxt_avg/HI')
+#writeOneDir('cslu_fae_corpus/npytxt/MA', 'cslu_fae_corpus/npytxt_avg/MA')
+#writeOneDir('cslu_fae_corpus/npytxt/HI', 'cslu_fae_corpus/npytxt_avg/HI')
     
 

@@ -1,4 +1,4 @@
-# Mini Classifier: <accentX> & <accentY>
+# Mini Classifier: AR, HI, MA (Arabic, Hindi, Mandarin)
 # Emily Ahn
 # 10.19.2015
 # Modified from GMM example with Iris data set, credits:
@@ -15,6 +15,8 @@ from sklearn import datasets
 from sklearn.cross_validation import StratifiedKFold
 from sklearn.externals.six.moves import xrange
 from sklearn.mixture import GMM
+#Emily's
+from os import listdir
 
 #leave this method alone. assume 3 classes // 3 accents // 3 colors
 def make_ellipses(gmm, ax):
@@ -29,10 +31,9 @@ def make_ellipses(gmm, ax):
         ell.set_clip_box(ax.bbox)
         ell.set_alpha(0.5)
         ax.add_artist(ell)
-
-# ********* how to read in all the .numtxt files and manipulate data, like iris?
+'''
 iris = datasets.load_iris()
-print iris
+#print iris
 
 # Break up the dataset into non-overlapping training (75%) and testing
 # (25%) sets.
@@ -40,12 +41,61 @@ skf = StratifiedKFold(iris.target, n_folds=4)
 # Only take the first fold.
 train_index, test_index = next(iter(skf))
 
-
 X_train = iris.data[train_index]
 y_train = iris.target[train_index]
 X_test = iris.data[test_index]
 y_test = iris.target[test_index]
 
+#is it randomized? ---> NO
+#len(y_train)=111, len(y_test)=39
+'''
+dirNames = ['cslu_fae_corpus/npytxt_avg/AR', 'cslu_fae_corpus/npytxt_avg/HI', 'cslu_fae_corpus/npytxt_avg/MA']
+files_AR = listdir(dirNames[0])
+files_HI= listdir(dirNames[1])
+files_MA = listdir(dirNames[2])
+all_files = files_AR + files_HI + files_MA
+
+# convert allFiles (holds list of fileNames) --> accents_data
+
+# fill target with int. 0=Arabic, 1=Hindi, 2=Mandarin
+# fill data with PLP values for each file
+accents_target = []
+accents_data = []
+for i in range(len(all_files)):
+    if i < len(files_AR):
+        accents_target.append(0)
+        with open(dirNames[0]+"/"+all_files[0]) as f:
+            line = f.readline()
+            one_row = line.split()
+            one_row = [float(num) for num in one_row]
+            accents_data.append(one_row)
+    elif (i < (len(files_AR) + len(files_HI))):
+        accents_target.append(1)
+        with open(dirNames[1]+"/"+all_files[1]) as f:
+            line = f.readline()
+            one_row = line.split()
+            one_row = [float(num) for num in one_row]
+            accents_data.append(one_row)
+    else:
+        accents_target.append(2)
+        with open(dirNames[2]+"/"+all_files[2]) as f:
+            line = f.readline()
+            one_row = line.split()
+            one_row = [float(num) for num in one_row]
+            accents_data.append(one_row)
+#print "accent data arabic: ", accents_data
+
+skf = StratifiedKFold(accents_target, n_folds=4)
+# Only take the first fold.
+train_index, test_index = next(iter(skf))
+
+X_train = accents_data[train_index]
+y_train = accents_target[train_index]
+X_test = accents_data[test_index]
+y_test = accents_target[test_index]
+
+
+'''# IRIS CODE BELOW ***************
 n_classes = len(np.unique(y_train))
 
 # Try GMMs using different types of covariances.
@@ -98,4 +148,4 @@ for index, (name, classifier) in enumerate(classifiers.items()):
 plt.legend(loc='lower right', prop=dict(size=12))
 
 
-plt.show()
+plt.show()'''
