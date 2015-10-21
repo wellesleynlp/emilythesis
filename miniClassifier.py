@@ -11,11 +11,11 @@ import matplotlib.pyplot as plt
 import matplotlib as mpl
 import numpy as np
 
-from sklearn import datasets
+#from sklearn import datasets #do not need this b/c I don't use iris
 from sklearn.cross_validation import StratifiedKFold
 from sklearn.externals.six.moves import xrange
 from sklearn.mixture import GMM
-#Emily's
+#Emily's new import
 from os import listdir
 
 #leave this method alone. assume 3 classes // 3 accents // 3 colors
@@ -62,6 +62,7 @@ accents_target_names = ['Arabic', 'Hindi', 'Mandarin']
 # fill data with PLP values for each file
 accents_target = []
 accents_data = []
+# note: I could make this for-loop into a method def, for conciseness
 for i in range(len(all_files)):
     if i < len(files_AR):
         accents_target.append(0)
@@ -84,19 +85,19 @@ for i in range(len(all_files)):
             one_row = line.split()
             one_row = [float(num) for num in one_row]
             accents_data.append(one_row)
+#make sure arrays are numpy arrays!
+accents_target = np.array(accents_target)
+accents_data = np.array(accents_data)
 
 skf = StratifiedKFold(accents_target, n_folds=4)
 # Only take the first fold.
 train_index, test_index = next(iter(skf))
 
-#print "acc data: ", accents_data
-#print "train index", train_index
-#print "train index at 2: ", train_index[2]
-
-X_train = [accents_data[i] for i in train_index]
-y_train = [accents_target[i] for i in train_index]
-X_test = [accents_data[i] for i in test_index]
-y_test = [accents_target[i] for i in test_index]
+# note: NOT RANDOM. test = first 25% of indices, train = last 75%
+X_train = np.array([accents_data[i] for i in train_index])
+y_train = np.array([accents_target[i] for i in train_index])
+X_test = np.array([accents_data[i] for i in test_index])
+y_test = np.array([accents_target[i] for i in test_index])
 
 
 n_classes = len(np.unique(y_train))
@@ -106,15 +107,13 @@ n_classes = len(np.unique(y_train))
 classifiers = dict((covar_type, GMM(n_components=n_classes,
                     covariance_type=covar_type, init_params='wc', n_iter=20))
                    for covar_type in ['spherical', 'diag', 'tied', 'full'])
-
+# EA: init_params: 'w' = weights, 'c' = covars
 n_classifiers = len(classifiers)
 
 plt.figure(figsize=(3 * n_classifiers / 2, 6))
 plt.subplots_adjust(bottom=.01, top=0.95, hspace=.15, wspace=.05,
                     left=.01, right=.99)
 
-# I get AttributeError line 120: 'list' object has no attribute 'mean'... 
-# X_train has no 'mean' attribute?
 for index, (name, classifier) in enumerate(classifiers.items()):
     # Since we have class labels for the training data, we can
     # initialize the GMM parameters in a supervised manner.
