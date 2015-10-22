@@ -63,6 +63,9 @@ accents_target_names = ['Arabic', 'Hindi', 'Mandarin']
 accents_target = []
 accents_data = []
 # note: I could make this for-loop into a method def, for conciseness
+
+# SR: yes, just write a function that takes a language as an argument and returns the accents_target and accents_data arrays (read these into numpy arrays directly using numpy concatenation rather than into lists first... it's faster). You can these concatenate the arrays for the different language together.
+
 for i in range(len(all_files)):
     if i < len(files_AR):
         accents_target.append(0)

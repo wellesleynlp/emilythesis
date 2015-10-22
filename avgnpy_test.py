@@ -41,6 +41,7 @@ def writeOneDir(oldDir, newDir):
         #for every column, find average
         for n in range(52): 
             list_n = [float(bigList[j][n]) for j in range(52)]
+            #SR: wait, why is the loop j in range(52)? There aren't necessarily 52 rows (each row is a time slice, so different files have different numbers of rows) By doing this, you're discarding everything after the first 520 milliseconds.
             avg_n = numpy.mean(list_n)
             avgList.append(avg_n)
         
