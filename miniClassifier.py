@@ -70,22 +70,19 @@ for i in range(len(all_files)):
     if i < len(files_AR):
         accents_target.append(0)
         with open(dirNames[0]+"/"+all_files[i]) as f:
-            line = f.readline()
-            one_row = line.split()
+            one_row = f.read().split()
             one_row = [float(num) for num in one_row]
             accents_data.append(one_row)
     elif (i < (len(files_AR) + len(files_HI))):
         accents_target.append(1)
         with open(dirNames[1]+"/"+all_files[i]) as f:
-            line = f.readline()
-            one_row = line.split()
+            one_row = f.read().split()
             one_row = [float(num) for num in one_row]
             accents_data.append(one_row)
     else:
         accents_target.append(2)
         with open(dirNames[2]+"/"+all_files[i]) as f:
-            line = f.readline()
-            one_row = line.split()
+            one_row = f.read().split()
             one_row = [float(num) for num in one_row]
             accents_data.append(one_row)
 #make sure arrays are numpy arrays!
@@ -124,7 +121,6 @@ for index, (name, classifier) in enumerate(classifiers.items()):
                                   for i in xrange(n_classes)])
 
     # Train the other parameters using the EM algorithm.
-    '''EA: What is EM?'''
     classifier.fit(X_train)
 
     h = plt.subplot(2, n_classifiers / 2, index + 1)
