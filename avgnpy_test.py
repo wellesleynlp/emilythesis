@@ -1,4 +1,4 @@
-# script to convert full PLP feature values into avgerages of PLP features
+# script to convert full PLP feature values into averages of PLP features
 # 10.19.2015
 # Emily Ahn
 

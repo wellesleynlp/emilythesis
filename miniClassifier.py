@@ -1,3 +1,5 @@
+from __future__ import division
+
 # Mini Classifier: AR, HI, MA (Arabic, Hindi, Mandarin)
 # Emily Ahn
 # 10.19.2015
@@ -5,10 +7,8 @@
 #     Ron Weiss <ronweiss@gmail.com>, Gael Varoquaux
 #     License: BSD 3 clause
 
-#print(__doc__)
-
-import matplotlib.pyplot as plt
-import matplotlib as mpl
+#import matplotlib.pyplot as plt
+#import matplotlib as mpl   # SR: no need to plot
 import numpy as np
 
 #from sklearn import datasets #do not need this b/c I don't use iris
@@ -16,7 +16,8 @@ from sklearn.cross_validation import StratifiedKFold
 from sklearn.externals.six.moves import xrange
 from sklearn.mixture import GMM
 #Emily's new import
-from os import listdir
+import os
+import sys
 
 #leave this method alone. assume 3 classes // 3 accents // 3 colors
 def make_ellipses(gmm, ax):
@@ -50,106 +51,95 @@ y_test = iris.target[test_index]
 #is it randomized? ---> NO
 #len(y_train)=111, len(y_test)=39
 '''
-#get all filenames of npytxt files
-dirNames = ['cslu_fae_corpus/npytxt_avg/AR', 'cslu_fae_corpus/npytxt_avg/HI', 'cslu_fae_corpus/npytxt_avg/MA']
-files_AR = listdir(dirNames[0])
-files_HI= listdir(dirNames[1])
-files_MA = listdir(dirNames[2])
-all_files = files_AR + files_HI + files_MA
 
-accents_target_names = ['Arabic', 'Hindi', 'Mandarin']
-# fill target with int. 0=Arabic, 1=Hindi, 2=Mandarin
-# fill data with PLP values for each file
-accents_target = []
-accents_data = []
-# note: I could make this for-loop into a method def, for conciseness
+if __name__=='__main__':  # SR wrap into main function
+    datadir = sys.argv[1]    # take corpus directory location on command line
+    #get all filenames of files
+    # SR: changed it to read npz files (can take averages on the fly)
+    langs = {'Arabic': os.path.join(datadir, 'npz', 'AR.npz'),
+             'Hindi': os.path.join(datadir, 'npz', 'HI.npz'),
+             'Mandarin': os.path.join(datadir, 'npz', 'MA.npz')}
 
-# SR: yes, just write a function that takes a language as an argument and returns the accents_target and accents_data arrays (read these into numpy arrays directly using numpy concatenation rather than into lists first... it's faster). You can these concatenate the arrays for the different language together.
+    accents_target_names = langs.keys()
+    # fill target with int. 0=Arabic, 1=Hindi, 2=Mandarin
+    # fill data with PLP values for each file
+    accents_target = []
+    accents_data = []
 
-for i in range(len(all_files)):
-    if i < len(files_AR):
-        accents_target.append(0)
-        with open(dirNames[0]+"/"+all_files[i]) as f:
-            one_row = f.read().split()
-            one_row = [float(num) for num in one_row]
-            accents_data.append(one_row)
-    elif (i < (len(files_AR) + len(files_HI))):
-        accents_target.append(1)
-        with open(dirNames[1]+"/"+all_files[i]) as f:
-            one_row = f.read().split()
-            one_row = [float(num) for num in one_row]
-            accents_data.append(one_row)
-    else:
-        accents_target.append(2)
-        with open(dirNames[2]+"/"+all_files[i]) as f:
-            one_row = f.read().split()
-            one_row = [float(num) for num in one_row]
-            accents_data.append(one_row)
-#make sure arrays are numpy arrays!
-accents_target = np.array(accents_target)
-accents_data = np.array(accents_data)
+    for li, lang in enumerate(accents_target_names):
+        npzdata = np.load(langs[lang])   # load from npz file
+        for filename in npzdata:
+            time_mean = np.mean(npzdata[filename], axis=0)  # take average
+            accents_data.append(time_mean)
+            accents_target.append(li)
+        
+    #make sure arrays are numpy arrays!
+    accents_target = np.array(accents_target)
+    accents_data = np.array(accents_data)
 
-skf = StratifiedKFold(accents_target, n_folds=4)
-# Only take the first fold.
-train_index, test_index = next(iter(skf))
+    skf = StratifiedKFold(accents_target, n_folds=4)
 
-# note: NOT RANDOM. test = first 25% of indices, train = last 75%
-X_train = np.array([accents_data[i] for i in train_index])
-y_train = np.array([accents_target[i] for i in train_index])
-X_test = np.array([accents_data[i] for i in test_index])
-y_test = np.array([accents_target[i] for i in test_index])
+    # Try GMMs using different types of covariances.
+    # EA: I hope this works without changing it
+    n_classes = len(langs)
+    
+    classifiers = dict((covar_type, GMM(n_components=n_classes,
+                            covariance_type=covar_type, init_params='wc', n_iter=20))
+                            for covar_type in ['spherical', 'diag', 'tied', 'full'])
+    # EA: init_params: 'w' = weights, 'c' = covars
+    n_classifiers = len(classifiers)
+        
+    # SR: let's iterate over all folds and average for each covariance type
+    train_acc_average = {}
+    test_acc_average = {}
+    
+    for (train_index, test_index) in skf:
 
+        # note: NOT RANDOM (that's ok). test = 25% of indices, train = other 75%
+        X_train = np.array([accents_data[i] for i in train_index])
+        y_train = np.array([accents_target[i] for i in train_index])
+        X_test = np.array([accents_data[i] for i in test_index])
+        y_test = np.array([accents_target[i] for i in test_index])
 
-n_classes = len(np.unique(y_train))
+        # SR: no need to plot
+        #plt.figure(figsize=(3 * n_classifiers / 2, 6))
+        #plt.subplots_adjust(bottom=.01, top=0.95, hspace=.15, wspace=.05, left=.01, right=.99)
 
-# Try GMMs using different types of covariances.
-# EA: I hope this works without changing it
-classifiers = dict((covar_type, GMM(n_components=n_classes,
-                    covariance_type=covar_type, init_params='wc', n_iter=20))
-                   for covar_type in ['spherical', 'diag', 'tied', 'full'])
-# EA: init_params: 'w' = weights, 'c' = covars
-n_classifiers = len(classifiers)
+        for index, (name, classifier) in enumerate(classifiers.items()):
+            # Since we have class labels for the training data, we can
+            # initialize the GMM parameters in a supervised manner.
+            classifier.means_ = np.array([X_train[y_train == i].mean(axis=0)
+                                    for i in xrange(n_classes)])
 
-plt.figure(figsize=(3 * n_classifiers / 2, 6))
-plt.subplots_adjust(bottom=.01, top=0.95, hspace=.15, wspace=.05,
-                    left=.01, right=.99)
+            # Train the other parameters using the EM algorithm.
+            classifier.fit(X_train)
 
-for index, (name, classifier) in enumerate(classifiers.items()):
-    # Since we have class labels for the training data, we can
-    # initialize the GMM parameters in a supervised manner.
-    classifier.means_ = np.array([X_train[y_train == i].mean(axis=0)
-                                  for i in xrange(n_classes)])
+            """SR: removing plotting code
+            h = plt.subplot(2, n_classifiers / 2, index + 1)
+            make_ellipses(classifier, h)
 
-    # Train the other parameters using the EM algorithm.
-    classifier.fit(X_train)
-
-    h = plt.subplot(2, n_classifiers / 2, index + 1)
-    make_ellipses(classifier, h)
-
-    for n, color in enumerate('rgb'):
-        data = accents_data[accents_target == n]
-        plt.scatter(data[:, 0], data[:, 1], 0.8, color=color,
+            for n, color in enumerate('rgb'):
+            data = accents_data[accents_target == n]
+            plt.scatter(data[:, 0], data[:, 1], 0.8, color=color,
                     label=accents_target_names[n])
-    # Plot the test data with crosses
-    for n, color in enumerate('rgb'):
-        data = X_test[y_test == n]
-        plt.plot(data[:, 0], data[:, 1], 'x', color=color)
+            # Plot the test data with crosses
+            for n, color in enumerate('rgb'):
+            data = X_test[y_test == n]
+            plt.plot(data[:, 0], data[:, 1], 'x', color=color)
+            """
+            
+            y_train_pred = classifier.predict(X_train)
+            train_accuracy = np.mean(y_train_pred.ravel() == y_train.ravel()) * 100
+            train_acc_average[name] = train_acc_average.get(name, 0) + train_accuracy
 
-    y_train_pred = classifier.predict(X_train)
-    train_accuracy = np.mean(y_train_pred.ravel() == y_train.ravel()) * 100
-    plt.text(0.05, 0.9, 'Train accuracy: %.1f' % train_accuracy,
-             transform=h.transAxes)
+            y_test_pred = classifier.predict(X_test)
+            test_accuracy = np.mean(y_test_pred.ravel() == y_test.ravel()) * 100
+            test_acc_average[name] = test_acc_average.get(name, 0) + test_accuracy
 
-    y_test_pred = classifier.predict(X_test)
-    test_accuracy = np.mean(y_test_pred.ravel() == y_test.ravel()) * 100
-    plt.text(0.05, 0.8, 'Test accuracy: %.1f' % test_accuracy,
-             transform=h.transAxes)
-
-    plt.xticks(())
-    plt.yticks(())
-    plt.title(name)
-
-plt.legend(loc='lower right', prop=dict(size=12))
-
-
-plt.show()
+    # now average over the folds
+    n_folds = len(classifiers)
+    for name in classifiers:
+        print 'Train accuracy for', name, 'is', train_acc_average[name]/n_folds
+        print 'Test accuracy for', name, 'is', test_acc_average[name]/n_folds
+        print
+        
