@@ -1,6 +1,6 @@
 from __future__ import division
 
-# Mini Classifier: AR, HI, MA (Arabic, Hindi, Mandarin)
+# Mini Classifier: AR, HI, MA (Arabic, Hindi, Mandarin, Brazilian Portuguese)
 # Emily Ahn
 # 10.19.2015
 # Modified from GMM example with Iris data set, credits:
@@ -58,10 +58,11 @@ if __name__=='__main__':  # SR wrap into main function
     # SR: changed it to read npz files (can take averages on the fly)
     langs = {'Arabic': os.path.join(datadir, 'npz', 'AR.npz'),
              'Hindi': os.path.join(datadir, 'npz', 'HI.npz'),
-             'Mandarin': os.path.join(datadir, 'npz', 'MA.npz')}
+             'Mandarin': os.path.join(datadir, 'npz', 'MA.npz'),
+             'Brazilian Portuguese': os.path.join(datadir, 'npz', 'BP.npz')}
 
     accents_target_names = langs.keys()
-    # fill target with int. 0=Arabic, 1=Hindi, 2=Mandarin
+    # fill target with int. 0=Arabic, 1=Hindi, 2=Mandarin, 3=Brazilian Portuguese
     # fill data with PLP values for each file
     accents_target = []
     accents_data = []
@@ -77,7 +78,7 @@ if __name__=='__main__':  # SR wrap into main function
     accents_target = np.array(accents_target)
     accents_data = np.array(accents_data)
 
-    skf = StratifiedKFold(accents_target, n_folds=4)
+    skf = StratifiedKFold(accents_target, n_folds=10)  # SR: give more training data (90-10 split)
 
     # Try GMMs using different types of covariances.
     # EA: I hope this works without changing it
@@ -112,7 +113,7 @@ if __name__=='__main__':  # SR wrap into main function
                                     for i in xrange(n_classes)])
 
             # Train the other parameters using the EM algorithm.
-            classifier.fit(X_train)
+            classifier.fit(X_train, y_train)
 
             """SR: removing plotting code
             h = plt.subplot(2, n_classifiers / 2, index + 1)
@@ -137,7 +138,7 @@ if __name__=='__main__':  # SR wrap into main function
             test_acc_average[name] = test_acc_average.get(name, 0) + test_accuracy
 
     # now average over the folds
-    n_folds = len(classifiers)
+    n_folds = len(skf)
     for name in classifiers:
         print 'Train accuracy for', name, 'is', train_acc_average[name]/n_folds
         print 'Test accuracy for', name, 'is', test_acc_average[name]/n_folds
