@@ -1,8 +1,8 @@
 from __future__ import division
 
-# Mini Classifier: AR, HI, MA (Arabic, Hindi, Mandarin, Brazilian Portuguese)
+# Mini Classifier: AR, HI, MA, BP (Arabic, Hindi, Mandarin, Brazilian Portuguese)
 # Emily Ahn
-# 10.19.2015
+# 10.28.2015
 # Modified from GMM example with Iris data set, credits:
 #     Ron Weiss <ronweiss@gmail.com>, Gael Varoquaux
 #     License: BSD 3 clause
@@ -20,7 +20,7 @@ import os
 import sys
 
 #leave this method alone. assume 3 classes // 3 accents // 3 colors
-def make_ellipses(gmm, ax):
+'''def make_ellipses(gmm, ax):
     for n, color in enumerate('rgb'):
         v, w = np.linalg.eigh(gmm._get_covars()[n][:2, :2])
         u = w[0] / np.linalg.norm(w[0])
@@ -31,7 +31,7 @@ def make_ellipses(gmm, ax):
                                   180 + angle, color=color)
         ell.set_clip_box(ax.bbox)
         ell.set_alpha(0.5)
-        ax.add_artist(ell)
+        ax.add_artist(ell)'''
 # below: iris data for my reference
 '''
 iris = datasets.load_iris()
@@ -142,5 +142,5 @@ if __name__=='__main__':  # SR wrap into main function
     for name in classifiers:
         print 'Train accuracy for', name, 'is', train_acc_average[name]/n_folds
         print 'Test accuracy for', name, 'is', test_acc_average[name]/n_folds
-        print
+        #print
         
