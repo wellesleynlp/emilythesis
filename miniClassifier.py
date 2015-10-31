@@ -53,13 +53,13 @@ y_test = iris.target[test_index]
 '''
 
 if __name__=='__main__':  # SR wrap into main function
-    datadir = sys.argv[1]    # take corpus directory location on command line
+    npzdir = sys.argv[1]    # take corpus directory location on command line
     #get all filenames of files
     # SR: changed it to read npz files (can take averages on the fly)
-    langs = {'Arabic': os.path.join(datadir, 'npz', 'AR.npz'),
-             'Hindi': os.path.join(datadir, 'npz', 'HI.npz'),
-             'Mandarin': os.path.join(datadir, 'npz', 'MA.npz'),
-             'Brazilian Portuguese': os.path.join(datadir, 'npz', 'BP.npz')}
+    langs = {'Arabic': os.path.join(npzdir, 'AR.npz'),
+             'Hindi': os.path.join(npzdir, 'HI.npz'),
+             'Mandarin': os.path.join(npzdir, 'MA.npz'),
+             'Brazilian Portuguese': os.path.join(npzdir, 'BP.npz')}
 
     accents_target_names = langs.keys()
     # fill target with int. 0=Arabic, 1=Hindi, 2=Mandarin, 3=Brazilian Portuguese
