@@ -12,7 +12,7 @@ from sklearn.mixture import GMM
 import os
 import sys
 
-def train_model(speech_array_list, n_components):
+def train_model(speech_array_list, n_components): #, covar_type
     """train GMM with n_components mixtures from data,
     represented as a list of arrays, where each array contains the
     PLPs from a speech file. Returns this model."""
@@ -21,13 +21,17 @@ def train_model(speech_array_list, n_components):
     # covar types: ['spherical', 'diag', 'tied', 'full']
     # covar --> parameter
     
-    #bigArray = []
-    #for single_array in speech_array_list:
-    #    bigArray = np.concatenate(bigArray, single_array)
-    bigArray = np.array(speech_array_list).flatten()
-    print "first 2 lines of bigArray: ", bigArray[0], " +++++ ", bigArray[1]
-    g = GMM(n_components=n_components,covariance_type='spherical', init_params='wc', n_iter=20)
-    g.fit(bigArray)
+    # WARNING: takes long time!!
+    bigArray = []
+    for single_array in speech_array_list:
+        for one_row in single_array:
+            bigArray.append(one_row)
+    #bigArray = np.array(speech_array_list).flatten()
+    #print "first 2 lines of bigArray: ", bigArray[0], " +++++ ", bigArray[1]
+    print "bigArray DONE"
+    g = GMM(n_components=n_components,covariance_type='tied', init_params='wc', n_iter=20)
+    g.fit(np.array(bigArray))
+    print "fitting DONE"
     return g
 
 def apply_model(gmm_model, speech_array):
@@ -39,11 +43,12 @@ def apply_model(gmm_model, speech_array):
 
 if __name__=='__main__':
     """load .npz data, split into train-test folds, run training and testing"""
-    npzdir = 'cslu_fae_corpus/npz' # sys.argv[1]  # directory with npz files
+    npzdir = 'cslu_fae_corpus/npz'#sys.argv[1] # # directory with npz files
     n_components = 5 #sys.argv[2]  # number of GMM components
+    #covar = sys.argv[3]
 
     langlist = ['AR', 'MA', 'HI']
-    n_folds = 10
+    n_folds = 4
 
     data = {}
     filenames = []  # list of length = number of files. nth element is filename of nth file.
@@ -70,7 +75,7 @@ if __name__=='__main__':
                                    for i in train_lang_indices]
             # list of PLP arrays corresponding to filenames in training
                         
-            models[lang] = train_model(train_lang_list, n_components)
+            models[lang] = train_model(train_lang_list, n_components) #, covar
         
         # now test
         accuracy = 0
