@@ -1,6 +1,7 @@
 from __future__ import division
 
-# Mini Classifier: AR, HI, MA, BP (Arabic, Hindi, Mandarin, Brazilian Portuguese)
+# Mini Classifier: AR, HI, MA, BP (Arabic, Hindi, Mandarin) 
+#     (11.04) Took out Brazilian Portuguese, to compare results with GMM classifier
 # Emily Ahn
 # 10.28.2015
 # Modified from GMM example with Iris data set, credits:
@@ -58,8 +59,8 @@ if __name__=='__main__':  # SR wrap into main function
     # SR: changed it to read npz files (can take averages on the fly)
     langs = {'Arabic': os.path.join(npzdir, 'AR.npz'),
              'Hindi': os.path.join(npzdir, 'HI.npz'),
-             'Mandarin': os.path.join(npzdir, 'MA.npz'),
-             'Brazilian Portuguese': os.path.join(npzdir, 'BP.npz')}
+             'Mandarin': os.path.join(npzdir, 'MA.npz')}
+             #'Brazilian Portuguese': os.path.join(npzdir, 'BP.npz')}
 
     accents_target_names = langs.keys()
     # fill target with int. 0=Arabic, 1=Hindi, 2=Mandarin, 3=Brazilian Portuguese
@@ -142,5 +143,5 @@ if __name__=='__main__':  # SR wrap into main function
     for name in classifiers:
         print 'Train accuracy for', name, 'is', train_acc_average[name]/n_folds
         print 'Test accuracy for', name, 'is', test_acc_average[name]/n_folds
-        #print
+        
         
