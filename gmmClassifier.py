@@ -1,5 +1,5 @@
 # Emily Ahn
-# 10.29.15
+# 11.11.15
 from __future__ import division
 
 """Accent classification using separate GMMs for each accent. 
@@ -11,24 +11,18 @@ from sklearn.cross_validation import StratifiedKFold
 from sklearn.mixture import GMM
 import os
 import sys
+from sklearn.metrics import confusion_matrix
 
 def train_model(speech_array_list, n_components, covar_type): 
     """train GMM with n_components mixtures from data,
     represented as a list of arrays, where each array contains the
     PLPs from a speech file. Returns this model."""
-    # to do
-    # experiment w/ diff covariance types (ex. 'spherical'), n_components
-    
-    # WARNING: takes long time!!
-    #bigArray = []
-    '''for single_array in speech_array_list:
-        for one_row in single_array:
-            bigArray.append(one_row)'''
+
     bigArray = np.vstack(speech_array_list)
     print "bigArray DONE"
     g = GMM(n_components=n_components,covariance_type=covar_type, init_params='wc', n_iter=20)
     g.fit(bigArray)
-    print "fitting DONE"
+    #print "fitting DONE"
     return g
 
 def apply_model(gmm_model, speech_array):
@@ -44,7 +38,10 @@ if __name__=='__main__':
     n_components = int(sys.argv[2])  # number of GMM components
     covar = sys.argv[3]    # covar types: ['spherical', 'diag', 'tied', 'full']
 
-    langlist = ['AR', 'MA', 'HI']
+    #langlist = ['AR', 'MA', 'HI']
+    #langlist = ['HU', 'PO', 'RU']
+    #langlist = ['JA', 'KO']
+    langlist = ['AR','BP','CA','CZ','FA','FR','GE','HI','HU','IN','IT','JA','KO','MA','MY','PO','PP','RU','SD','SP','SW','TA','VI']
     n_folds = 4
 
     data = {}
@@ -63,6 +60,11 @@ if __name__=='__main__':
     folds = StratifiedKFold(labels, n_folds = n_folds, shuffle = True)
     # initialize list to put accuracy of each fold, to be averaged over & printed
     accuracy_list = np.empty(len(folds))
+    
+    # initialize lists to put in predictions & results. For Confusion matrix
+    predicted_list = []
+    actual_list = []
+    
     for foldid, (train_indices, test_indices) in enumerate(folds):
         models = {}   # store models for each lang
         for li, lang in enumerate(langlist):
@@ -86,9 +88,21 @@ if __name__=='__main__':
             for lang in langlist:
                 logprobs[lang] = apply_model(models[lang], data[actual_lang][filename])
             predicted_lang = max(logprobs.items(), key=lambda x:x[1])[0]
+            # insert prediction (of lang index) into predicted list
+            predicted_list.append(predicted_lang)
+            actual_list.append(actual_lang)
             if actual_lang == predicted_lang:
                 accuracy += 1
         accuracy_list[foldid] = accuracy/len(test_indices)
         print 'Accuracy for fold', foldid, 'is', accuracy_list[foldid]
 
     print 'AVG over', len(folds), 'folds is', np.average(accuracy_list)
+    
+    #CONFUSION MATRIX (y_test, y_pred) -> (actual label, predictions)
+    cm = confusion_matrix(actual_list, predicted_list, labels=langlist) 
+    np.set_printoptions(precision=2)
+    print('Confusion matrix, without normalization')
+    print(cm)
+    cm_normalized = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
+    print('Normalized confusion matrix')
+    print(cm_normalized)
