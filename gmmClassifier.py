@@ -7,7 +7,6 @@ See http://www.ece.mcgill.ca/~rrose1/papers/reynolds_rose_sap95.pdf for outline 
 """
 
 import numpy as np
-from sklearn.cross_validation import StratifiedKFold
 from sklearn.mixture import GMM
 import os
 import sys
@@ -19,10 +18,8 @@ def train_model(speech_array_list, n_components, covar_type):
     PLPs from a speech file. Returns this model."""
 
     bigArray = np.vstack(speech_array_list)
-    print "bigArray DONE"
-    g = GMM(n_components=n_components,covariance_type=covar_type, init_params='wc', n_iter=20)
+    g = GMM(n_components=n_components,covariance_type=covar_type)
     g.fit(bigArray)
-    #print "fitting DONE"
     return g
 
 def apply_model(gmm_model, speech_array):
@@ -42,67 +39,57 @@ if __name__=='__main__':
     #langlist = ['HU', 'PO', 'RU']
     #langlist = ['JA', 'KO']
     langlist = ['AR','BP','CA','CZ','FA','FR','GE','HI','HU','IN','IT','JA','KO','MA','MY','PO','PP','RU','SD','SP','SW','TA','VI']
-    n_folds = 4
 
     data = {}
-    filenames = []  # list of length = number of files. nth element is filename of nth file.
-    labels = []   # list of length = number of files. nth element is integer corresponding to the nth file's accent
-    
-    # for each Lang, create dictionary "data"
+    # for each Lang, create dictionary in "data"
     for li, lang in enumerate(langlist):
         with np.load(os.path.join(npzdir, lang+'.npz')) as x:
             data[lang] = dict(x)
+        print 'Loaded compressed data for', lang
         # format: data['AR'] = {'FAR00001': speech PLP array}
         
-        filenames.extend(data[lang].keys())
-        labels.extend([li]*len(data[lang]))
-    
-    folds = StratifiedKFold(labels, n_folds = n_folds, shuffle = True)
-    # initialize list to put accuracy of each fold, to be averaged over & printed
-    accuracy_list = np.empty(len(folds))
-    
-    # initialize lists to put in predictions & results. For Confusion matrix
-    predicted_list = []
-    actual_list = []
-    
-    for foldid, (train_indices, test_indices) in enumerate(folds):
-        models = {}   # store models for each lang
-        for li, lang in enumerate(langlist):
-            
-            train_lang_indices = [i for i in train_indices if labels[i] == li]
-            # indices corresponding to this lang
-
-            train_lang_list = [data[lang][filenames[i]] \
-                                   for i in train_lang_indices]
-            # list of PLP arrays corresponding to filenames in training
+    models = {}   # store models for each lang
+    for li, lang in enumerate(langlist):
+        train_files = open(os.path.join('traintestsplit', lang+'.trainlist')).read().split()
+        train_lang_list = [data[lang][filename+'.npytxt'] for filename in train_files]
+        # list of PLP arrays corresponding to filenames in training
                         
-            models[lang] = train_model(train_lang_list, n_components, covar)
+        models[lang] = train_model(train_lang_list, n_components, covar)
+        print 'Trained model for', lang
         
-        # now test
-        accuracy = 0
-        for test_index in test_indices:
-            filename = filenames[test_index]
-            actual_label = labels[test_index] # 0, 1, etc (lang index)
-            actual_lang = langlist[actual_label]
-            logprobs = {}   # dict: total log prob of this file under each model
-            for lang in langlist:
-                logprobs[lang] = apply_model(models[lang], data[actual_lang][filename])
-            predicted_lang = max(logprobs.items(), key=lambda x:x[1])[0]
-            # insert prediction (of lang index) into predicted list
-            predicted_list.append(predicted_lang)
-            actual_list.append(actual_lang)
-            if actual_lang == predicted_lang:
-                accuracy += 1
-        accuracy_list[foldid] = accuracy/len(test_indices)
-        print 'Accuracy for fold', foldid, 'is', accuracy_list[foldid]
+    # now test
+    num_correct = 0.0
+    num_total = 0.0
 
-    print 'AVG over', len(folds), 'folds is', np.average(accuracy_list)
+    # initialize lists to put in predictions & results. For Confusion matrix 
+    predicted_labels = []
+    actual_labels = []
+
+    for li, actual_lang in enumerate(langlist):
+        test_files = open(os.path.join('train_test_split', lang+'.testlist')).read().split()
+        
+        for filename in test_files: 
+            logprobs = {}   # dict: total log prob of this file under each model
+            for test_lang in langlist:
+                logprobs[test_lang] = apply_model(models[test_lang], data[actual_lang][filename+'.npytxt'])
+            predicted_lang = max(logprobs.items(), key=lambda x:x[1])[0]
+            
+            # insert prediction (of lang index) into predicted list
+            predicted_labels.append(predicted_lang)
+            actual_labels.append(actual_lang)
+            if actual_lang == predicted_lang:
+                num_correct += 1
+            num_total += 1
+            
+    print 'Accuracy', num_correct/num_total
     
     #CONFUSION MATRIX (y_test, y_pred) -> (actual label, predictions)
-    cm = confusion_matrix(actual_list, predicted_list, labels=langlist) 
-    np.set_printoptions(precision=2)
-    print('Confusion matrix, without normalization')
-    print(cm)
+    cm = confusion_matrix(actual_labels, predicted_labels, labels=langlist) 
     cm_normalized = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
-    print('Normalized confusion matrix')
-    print(cm_normalized)
+    # display confusion stats by lang
+    for ai, actual_lang in enumerate(langlist):
+        print actual_lang, 'confusion:'
+        for pi, predicted_lang in enumerate(langlist):
+            print predicted_lang, ':', cm_normalized[ai, pi]*100, '%'
+        print '*'*30
+    
