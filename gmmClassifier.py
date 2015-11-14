@@ -29,6 +29,57 @@ def apply_model(gmm_model, speech_array):
     # assume that each time stamp's log-probs are INDEPENDENT
     return np.sum(gmm_model.score(speech_array))
 
+def load_data(npzdir, langlist):
+    data = {}
+    # for each Lang, create dictionary in "data"                                                     
+    for li, lang in enumerate(langlist):
+        with np.load(os.path.join(npzdir, lang+'.npz')) as x:
+            data[lang] = dict(x)
+        print 'Loaded compressed data for', lang
+    return data
+
+def get_train_data(data, lang):
+    """return list of PLP arrays corresponding to filenames in training for this lang"""
+    train_files = open(os.path.join('traintestsplit', lang+'.trainlist')).read().split()
+    return [data[lang][filename+'.npytxt'] for filename in train_files]
+
+def run_test(models, data):
+    """apply trained models to each file in test data"""
+    num_correct = 0.0
+    num_total = 0.0
+
+    # initialize lists to put in predictions & results for confusion matrix 
+    predicted_labels = []
+    actual_labels = []
+    langlist = models.keys()
+    for ai, actual_lang in enumerate(langlist):
+        test_files = open(os.path.join('traintestsplit', actual_lang+'.testlist')).read().split()
+        for filename in test_files:
+            logprobs = {}   # dict: total log prob of this file under each model                    
+            for test_lang in langlist:
+                logprobs[test_lang] = apply_model(models[test_lang], data[actual_lang][filename+'.npytxt'])
+            predicted_lang = max(logprobs.items(), key=lambda x:x[1])[0]
+            # insert prediction (of lang index) into predicted list                                     
+            predicted_labels.append(langlist.index(predicted_lang))
+            actual_labels.append(ai)
+            if actual_lang == predicted_lang:
+                num_correct += 1
+            num_total += 1
+
+    print
+    print 'Accuracy', num_correct*100/num_total
+
+    #CONFUSION MATRIX (y_test, y_pred) -> (actual label, predictions)                                   
+    cm = confusion_matrix(actual_labels, predicted_labels)
+    cm_normalized = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
+    # display confusion stats by lang (TODO: visualize with matplotlib)                                 
+    print '*'*20
+    for ai, actual_lang in enumerate(langlist):
+        print actual_lang, 'confusion:'
+        for pi, predicted_lang in enumerate(langlist):
+            print '{0}: {1:.2f}%'.format(predicted_lang, cm_normalized[ai, pi]*100)
+        print '*'*20
+
 if __name__=='__main__':
     """load .npz data, split into train-test folds, run training and testing"""
     npzdir = sys.argv[1] #'cslu_fae_corpus/npz' # directory with npz files
@@ -40,60 +91,13 @@ if __name__=='__main__':
     #langlist = ['JA', 'KO']
     langlist = ['AR','BP','CA','CZ','FA','FR','GE','HI','HU','IN','IT','JA','KO','MA','MY','PO','PP','RU','SD','SP','SW','TA','VI']
 
-    data = {}
-    # for each Lang, create dictionary in "data"
-    for li, lang in enumerate(langlist):
-        with np.load(os.path.join(npzdir, lang+'.npz')) as x:
-            data[lang] = dict(x)
-        print 'Loaded compressed data for', lang
-        # format: data['AR'] = {'FAR00001': speech PLP array}
-        
-    models = {}   # store models for each lang
+    data = load_data(npzdir, langlist)
     
+    models = {}   # store trained models for each lang
     for li, lang in enumerate(langlist):
-        train_files = open(os.path.join('traintestsplit', lang+'.trainlist')).read().split()
-        train_lang_list = [data[lang][filename+'.npytxt'] for filename in train_files]
-        # list of PLP arrays corresponding to filenames in training
-                        
+        train_lang_list = get_train_data(data, lang)
         models[lang] = train_model(train_lang_list, n_components, covar)
         print 'Trained model for', lang
     
     # now test
-    num_correct = 0.0
-    num_total = 0.0
-
-    # initialize lists to put in predictions & results. For Confusion matrix 
-    predicted_labels = []
-    actual_labels = []
-
-    for ai, actual_lang in enumerate(langlist):
-        test_files = open(os.path.join('traintestsplit', actual_lang+'.testlist')).read().split()
-        
-        for filename in test_files:
-            
-            logprobs = {}   # dict: total log prob of this file under each model
-            for test_lang in langlist:
-                logprobs[test_lang] = apply_model(models[test_lang], data[actual_lang][filename+'.npytxt'])
-            predicted_lang = max(logprobs.items(), key=lambda x:x[1])[0]
-            
-            # insert prediction (of lang index) into predicted list
-            predicted_labels.append(langlist.index(predicted_lang))
-            actual_labels.append(ai)
-            if actual_lang == predicted_lang:
-                num_correct += 1
-            num_total += 1
-            
-    print
-    print 'Accuracy', num_correct*100/num_total
-    
-    #CONFUSION MATRIX (y_test, y_pred) -> (actual label, predictions)
-    cm = confusion_matrix(actual_labels, predicted_labels) 
-    cm_normalized = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
-    # display confusion stats by lang (TODO: visualize with matplotlib)
-    print '*'*30
-    for ai, actual_lang in enumerate(langlist):
-        print actual_lang, 'confusion:'
-        for pi, predicted_lang in enumerate(langlist):
-            print '{0}: {1:.2f}%'.format(predicted_lang, cm_normalized[ai, pi]*100)
-        print '*'*30
-    
+    run_test(models, data)
