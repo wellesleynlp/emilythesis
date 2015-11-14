@@ -35,10 +35,10 @@ if __name__=='__main__':
     n_components = int(sys.argv[2])  # number of GMM components
     covar = sys.argv[3]    # covar types: ['spherical', 'diag', 'tied', 'full']
 
-    langlist = ['AR', 'MA', 'HI']
+    #langlist = ['AR', 'MA', 'HI']
     #langlist = ['HU', 'PO', 'RU']
     #langlist = ['JA', 'KO']
-    #langlist = ['AR','BP','CA','CZ','FA','FR','GE','HI','HU','IN','IT','JA','KO','MA','MY','PO','PP','RU','SD','SP','SW','TA','VI']
+    langlist = ['AR','BP','CA','CZ','FA','FR','GE','HI','HU','IN','IT','JA','KO','MA','MY','PO','PP','RU','SD','SP','SW','TA','VI']
 
     data = {}
     # for each Lang, create dictionary in "data"
@@ -94,6 +94,6 @@ if __name__=='__main__':
     for ai, actual_lang in enumerate(langlist):
         print actual_lang, 'confusion:'
         for pi, predicted_lang in enumerate(langlist):
-            print '{0}: {1:2f}%'.format(predicted_lang, cm_normalized[ai, pi]*100)
+            print '{0}: {1:.2f}%'.format(predicted_lang, cm_normalized[ai, pi]*100)
         print '*'*30
     
