@@ -1,6 +1,6 @@
-# Emily Ahn
-# 11.11.15
 from __future__ import division
+
+__author__='Emily Ahn and Sravana Reddy'
 
 """Accent classification using separate GMMs for each accent. 
 See http://www.ece.mcgill.ca/~rrose1/papers/reynolds_rose_sap95.pdf for outline of process.
@@ -35,10 +35,10 @@ if __name__=='__main__':
     n_components = int(sys.argv[2])  # number of GMM components
     covar = sys.argv[3]    # covar types: ['spherical', 'diag', 'tied', 'full']
 
-    #langlist = ['AR', 'MA', 'HI']
+    langlist = ['AR', 'MA', 'HI']
     #langlist = ['HU', 'PO', 'RU']
     #langlist = ['JA', 'KO']
-    langlist = ['AR','BP','CA','CZ','FA','FR','GE','HI','HU','IN','IT','JA','KO','MA','MY','PO','PP','RU','SD','SP','SW','TA','VI']
+    #langlist = ['AR','BP','CA','CZ','FA','FR','GE','HI','HU','IN','IT','JA','KO','MA','MY','PO','PP','RU','SD','SP','SW','TA','VI']
 
     data = {}
     # for each Lang, create dictionary in "data"
@@ -49,6 +49,7 @@ if __name__=='__main__':
         # format: data['AR'] = {'FAR00001': speech PLP array}
         
     models = {}   # store models for each lang
+    
     for li, lang in enumerate(langlist):
         train_files = open(os.path.join('traintestsplit', lang+'.trainlist')).read().split()
         train_lang_list = [data[lang][filename+'.npytxt'] for filename in train_files]
@@ -56,7 +57,7 @@ if __name__=='__main__':
                         
         models[lang] = train_model(train_lang_list, n_components, covar)
         print 'Trained model for', lang
-        
+    
     # now test
     num_correct = 0.0
     num_total = 0.0
@@ -65,31 +66,34 @@ if __name__=='__main__':
     predicted_labels = []
     actual_labels = []
 
-    for li, actual_lang in enumerate(langlist):
-        test_files = open(os.path.join('train_test_split', lang+'.testlist')).read().split()
+    for ai, actual_lang in enumerate(langlist):
+        test_files = open(os.path.join('traintestsplit', actual_lang+'.testlist')).read().split()
         
-        for filename in test_files: 
+        for filename in test_files:
+            
             logprobs = {}   # dict: total log prob of this file under each model
             for test_lang in langlist:
                 logprobs[test_lang] = apply_model(models[test_lang], data[actual_lang][filename+'.npytxt'])
             predicted_lang = max(logprobs.items(), key=lambda x:x[1])[0]
             
             # insert prediction (of lang index) into predicted list
-            predicted_labels.append(predicted_lang)
-            actual_labels.append(actual_lang)
+            predicted_labels.append(langlist.index(predicted_lang))
+            actual_labels.append(ai)
             if actual_lang == predicted_lang:
                 num_correct += 1
             num_total += 1
             
-    print 'Accuracy', num_correct/num_total
+    print
+    print 'Accuracy', num_correct*100/num_total
     
     #CONFUSION MATRIX (y_test, y_pred) -> (actual label, predictions)
-    cm = confusion_matrix(actual_labels, predicted_labels, labels=langlist) 
+    cm = confusion_matrix(actual_labels, predicted_labels) 
     cm_normalized = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
-    # display confusion stats by lang
+    # display confusion stats by lang (TODO: visualize with matplotlib)
+    print '*'*30
     for ai, actual_lang in enumerate(langlist):
         print actual_lang, 'confusion:'
         for pi, predicted_lang in enumerate(langlist):
-            print predicted_lang, ':', cm_normalized[ai, pi]*100, '%'
+            print '{0}: {1:2f}%'.format(predicted_lang, cm_normalized[ai, pi]*100)
         print '*'*30
     
