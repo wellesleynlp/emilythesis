@@ -1,5 +1,5 @@
 # Emily Ahn
-# 11.11.15
+# 11.19.15
 # Using SVC (Support Vector Classification)
 from __future__ import division
 
@@ -21,36 +21,38 @@ if __name__=='__main__':
     n_folds = 2
         
     accents_target = []
-    accents_data = []
+    data = {}
 
     for li, lang in enumerate(langlist):
         npzdata = np.load(os.path.join(npzdir, lang+'.npz'))   # load from npz file
-        accents_data.append(npzdata)
-        accents_target.append(li)
+        lang_data = np.array([npzdata[key] for key in npzdata.keys()])
+        np.vstack(lang_data) #this potentially isn't doing anything
+        data[lang] = lang_data
+        accents_target.extend([li]*len(npzdata.keys()))
         
     #make sure arrays are numpy arrays!
     accents_target = np.array(accents_target)
-    accents_data = np.array(accents_data)
+    accents_data = np.array([data[lang] for lang in langlist])
+    print "data len:", len(accents_data) # 3 (which should not be the case)
+    #------ValueError: all the input array dimensions except for the concatenation axis must match exactly 
+    np.vstack(accents_data)
     
     folds = StratifiedKFold(accents_target, n_folds = n_folds, shuffle = True)
     
-    '''EA: These lists may not apply (from GMM)
-    # initialize list to put accuracy of each fold, to be averaged over & printed
-    accuracy_list = np.empty(len(folds))
-    
-    # initialize lists to put in predictions & results. For Confusion matrix
-    predicted_list = []
-    actual_list = []'''
-    
     for foldid, (train_indices, test_indices) in enumerate(folds):
+
         X_train = np.array([accents_data[i] for i in train_indices])
         y_train = np.array([accents_target[i] for i in train_indices])
         X_test = np.array([accents_data[i] for i in test_indices])
         y_test = np.array([accents_target[i] for i in test_indices])
+        print "X_train info:", X_train[0]
         
         # (diff. from GMM: no models to train)
         C = 1.0 # SVM regularization parameter
-        svc = svm.SVC(kernel='rbf', gamma=0.7, C=C).fit(X_train, y_train)
+        svc = svm.SVC(kernel='rbf', gamma=0.7, C=C)
+        #--------When X_train is appropriately len of 742...
+        #--------ValueError: setting an array element with a sequence. (below)
+        svc.fit(X_train, y_train)
         #potential extra parameter for multi-class SVC: decision_function_shape='ovo'
         
         y_train_pred = svc.predict(X_train)
