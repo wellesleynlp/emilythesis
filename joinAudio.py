@@ -12,5 +12,5 @@ dirNames = ['cslu_fae_corpus/speech/AR', 'cslu_fae_corpus/speech/CZ', 'cslu_fae_
 single = ""
 # enter index # to change name
 for filename in listdir(dirNames[2]):
-    single += filename + " marwick.wav "
+    single += filename + " 3s_pause.wav "
 print "sox " + single

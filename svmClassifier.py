@@ -26,7 +26,9 @@ if __name__=='__main__':
     for li, lang in enumerate(langlist):
         npzdata = np.load(os.path.join(npzdir, lang+'.npz'))   # load from npz file
         lang_data = np.array([npzdata[key] for key in npzdata.keys()])
+        print "1 lang-data shape:", lang_data.shape()
         np.vstack(lang_data) #this potentially isn't doing anything
+        print "2 lang-data shape:", lang_data.shape()
         data[lang] = lang_data
         accents_target.extend([li]*len(npzdata.keys()))
         
