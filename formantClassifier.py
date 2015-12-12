@@ -54,49 +54,44 @@ def split_data(all_data, time_split):
     
 # for 1 vowel only, returns 1 GMM
 def train_model(formants_list):
-    g = GMM(n_components=3,covariance_type='full')
+    g = GMM(n_components=1,covariance_type='full')
     g.fit(formants_list)
     return g
     
-# for all vowels (entire dict of models) for 1 language
-def apply_models(model_dict, speech_sample):
-    return 0 #log prob
+# for one vowel for 1 language
+def apply_models(model, speech_samples):
+    return np.sum(model.score(speech_samples))
 
 if __name__=='__main__':
-    AR_data = read_csv('AR_formants.csv')
-    CZ_data = read_csv('CZ_formants.csv')
-    IN_data = read_csv('IN_formants.csv')
+    lang_list = ['AR', 'CZ', 'IN']
     # AR: out of 2413 seconds, split train-test at 75%, or at 1809sec
     # CZ: out of 2316 seconds, split train-test at 75%, or at 1737sec
     # IN: out of 2170 seconds, split train-test at 75%, or at 1630sec
-    AR_train_data, AR_test_data = split_data(AR_data, 1809.)
-    CZ_train_data, CZ_test_data = split_data(CZ_data, 1737.)
-    IN_train_data, IN_test_data = split_data(IN_data, 1630.)
-    
-    AR_models = {}
-    CZ_models = {}
-    IN_models = {}
+    time_list = {'AR':1809., 'CZ':1737., 'IN':1630.}
+    lang_data = {lang: read_csv(lang+'_formants.csv') for lang in lang_list}
+    train_test = {lang: split_data(lang_data[lang], time_list[lang]) for lang in lang_list}
+    models = {}
     # TRAIN ALL MODELS. loop through 15 vowels
-    for vowel in AR_data.keys():
-        AR_models[vowel] = train_model(AR_train_data[vowel])
-        CZ_models[vowel] = train_model(CZ_train_data[vowel])
-        IN_models[vowel] = train_model(IN_train_data[vowel])
+    for lang in lang_list:
+        models[lang] = {}
+        
+        for vowel in lang_data['AR'].keys():
+            models[lang][vowel] = train_model(train_test[lang][0][vowel])
     
     # TEST (for now) individual vowel's samples at a time,
     logprobs = defaultdict(dict)
     predicted_lang = defaultdict(dict) 
-    # for now, test only on IN_test_data
-    print "FOR ALL IN TEST DATA:"
-    for vowel in AR_data.keys():
-        logprobs[vowel]['AR'] = apply_models(AR_models[vowel], IN_test_data[vowel])
-        logprobs[vowel]['CZ'] = apply_models(CZ_models[vowel], IN_test_data[vowel])
-        logprobs[vowel]['IN'] = apply_models(IN_models[vowel], IN_test_data[vowel])
-    
-        predicted_lang[vowel] = max(logprobs[vowel].items(), key=lambda x:x[1])[0]
-        print vowel, "predicted:", predicted_lang[vowel]
-    '''Note: when testing on all AR only, or all CZ only, or all IN only,
-            every vowel is predicted to be CZ
-    '''
+
+    for test_lang in lang_list:
+        logprobs = defaultdict(dict)
+        predicted_lang = defaultdict(dict) 
+        for vowel in lang_data['AR'].keys():
+            for train_lang in lang_list:
+                logprobs[vowel][train_lang] = apply_models(models[train_lang][vowel], train_test[test_lang][1][vowel])
+        
+            predicted_lang[vowel] = max(logprobs[vowel].items(), key=lambda x:x[1])[0]
+            print "LOGPROB", logprobs[vowel]
+            print vowel, "actual:", test_lang, "predicted:", predicted_lang[vowel]
     
     
     
