@@ -11,64 +11,68 @@ item []:
 		name = "phone"
 		xmin = 0.0
 		xmax = 4.08
-		intervals: size = 15
+		intervals: size = 16
 			intervals [1]:
 				xmin = 0.0
-				xmax = 1.97
+				xmax = 1.96
 				text = "sil"
 			intervals [2]:
-				xmin = 1.97
+				xmin = 1.96
 				xmax = 2.01
 				text = "Y"
 			intervals [3]:
 				xmin = 2.01
-				xmax = 2.49
+				xmax = 2.48
 				text = "EH1"
 			intervals [4]:
-				xmin = 2.49
-				xmax = 2.52
+				xmin = 2.48
+				xmax = 2.55
 				text = "S"
 			intervals [5]:
-				xmin = 2.52
-				xmax = 2.99
+				xmin = 2.55
+				xmax = 2.82
 				text = ""
 			intervals [6]:
-				xmin = 2.99
-				xmax = 3.13
+				xmin = 2.82
+				xmax = 3.12
 				text = "AY1"
 			intervals [7]:
-				xmin = 3.13
-				xmax = 3.26
+				xmin = 3.12
+				xmax = 3.29
 				text = "K"
 			intervals [8]:
-				xmin = 3.26
+				xmin = 3.29
 				xmax = 3.4
 				text = "EY1"
 			intervals [9]:
 				xmin = 3.4
-				xmax = 3.57
+				xmax = 3.59
 				text = "M"
 			intervals [10]:
-				xmin = 3.57
-				xmax = 3.69
-				text = "F"
+				xmin = 3.59
+				xmax = 3.64
+				text = ""
 			intervals [11]:
-				xmin = 3.69
-				xmax = 3.72
-				text = "R"
+				xmin = 3.64
+				xmax = 3.71
+				text = "F"
 			intervals [12]:
-				xmin = 3.72
-				xmax = 3.9
-				text = "AH1"
+				xmin = 3.71
+				xmax = 3.78
+				text = "R"
 			intervals [13]:
-				xmin = 3.9
-				xmax = 3.99
-				text = "M"
+				xmin = 3.78
+				xmax = 3.81
+				text = "AH1"
 			intervals [14]:
-				xmin = 3.99
+				xmin = 3.81
+				xmax = 3.98
+				text = "M"
+			intervals [15]:
+				xmin = 3.98
 				xmax = 4.06
 				text = "EY1"
-			intervals [15]:
+			intervals [16]:
 				xmin = 4.06
 				xmax = 4.08
 				text = "sil"
@@ -77,36 +81,40 @@ item []:
 		name = "word"
 		xmin = 0.0
 		xmax = 4.08
-		intervals: size = 8
+		intervals: size = 9
 			intervals [1]:
 				xmin = 0.0
-				xmax = 1.97
+				xmax = 1.96
 				text = "sil"
 			intervals [2]:
-				xmin = 1.97
-				xmax = 2.52
+				xmin = 1.96
+				xmax = 2.55
 				text = "yes"
 			intervals [3]:
-				xmin = 2.52
-				xmax = 2.99
+				xmin = 2.55
+				xmax = 2.82
 				text = "sp"
 			intervals [4]:
-				xmin = 2.99
-				xmax = 3.13
+				xmin = 2.82
+				xmax = 3.12
 				text = "i"
 			intervals [5]:
-				xmin = 3.13
-				xmax = 3.57
+				xmin = 3.12
+				xmax = 3.59
 				text = "came"
 			intervals [6]:
-				xmin = 3.57
-				xmax = 3.99
-				text = "from"
+				xmin = 3.59
+				xmax = 3.64
+				text = "sp"
 			intervals [7]:
-				xmin = 3.99
+				xmin = 3.64
+				xmax = 3.98
+				text = "from"
+			intervals [8]:
+				xmin = 3.98
 				xmax = 4.06
 				text = "a"
-			intervals [8]:
+			intervals [9]:
 				xmin = 4.06
 				xmax = 4.08
 				text = "sil"
