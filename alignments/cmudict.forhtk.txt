@@ -9439,8 +9439,8 @@ belsito  B EH0 L S IY1 T OW0
 belsky  B EH1 L S K IY0
 belson  B EH1 L S AH0 N
 belt  B EH1 L T
-beltan  B EH1 L T AH0 N
 belt\'s  B EH1 L T S
+beltan  B EH1 L T AH0 N
 belted  B EH1 L T IH0 D
 belter  B EH1 L T ER0
 belth  B EH1 L TH
@@ -45658,9 +45658,10 @@ gradovs  G R EY1 D AO0 F S
 grads  G R AE1 D Z
 gradstein  G R AE1 D S T IY0 N
 gradstein\'s  G R AE1 D S T IY0 N Zal  G R AE1 JH UW0 AH0 L
-gradU  G R AE1 D UW0
-gradualism  G
-gradu R AE1 JH AH0 W AH0 L IH2 Z AH0 M
+grad  G R AE1 D
+gradu  G R AE1 D UW0
+gradual  G R AE1 JH UW0 AH0 L
+gradualism  G R AE1 JH AH0 W AH0 L IH2 Z AH0 M
 gradualist  G R AE1 JH AH0 W AH0 L IH0 S T
 gradually  G R AE1 JH UW0 L IY0
 graduate  G R AE1 JH UW0 W AH0 T
