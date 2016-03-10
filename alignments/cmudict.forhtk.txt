@@ -7508,8 +7508,8 @@ bananas  B AH0 N AE1 N AH0 Z
 banas  B AE1 N AH0 Z
 banasiak  B AH0 N AA1 S IY0 AE0 K
 banaszak  B AH0 N AA1 SH AH0 K
-banbury  B AE1 N B EH2 R IY0
 banbo  B AH1 N B OW0
+banbury  B AE1 N B EH2 R IY0
 banc  B AE1 NG K
 banca  B AE1 NG K AH0
 bancaire  B AE0 N K EH1 R
@@ -45657,8 +45657,7 @@ gradov  G R EY1 D AO0 F
 gradovs  G R EY1 D AO0 F S
 grads  G R AE1 D Z
 gradstein  G R AE1 D S T IY0 N
-gradstein\'s  G R AE1 D S T IY0 N Zal  G R AE1 JH UW0 AH0 L
-grad  G R AE1 D
+gradstein\'s  G R AE1 D S T IY0 N Z
 gradu  G R AE1 D UW0
 gradual  G R AE1 JH UW0 AH0 L
 gradualism  G R AE1 JH AH0 W AH0 L IH2 Z AH0 M
@@ -79946,7 +79945,6 @@ ohrt  AO1 R T
 ohs  OW1 Z
 oi  OY1
 oie  OY1
-oit  OW1 AY1 T IY1
 oien  AA1 IY0 N
 oil  OY1 L
 oil\'s  OY1 L Z
@@ -79965,6 +79963,7 @@ oilwell  OY1 L W EH2 L
 oily  OY1 L IY0
 ointment  OY1 N T M AH0 N T
 oishi  OW0 IY1 SH IY0
+oit  OW1 AY1 T IY1
 oj  OW1 JH EY1
 oja  OW1 Y AH0
 ojala  OW0 Y AA1 L AH0
