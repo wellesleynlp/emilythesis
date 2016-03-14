@@ -40,11 +40,11 @@ def phone_dict_tofile(phone_dict, lang, filename):
 	"""
 	# initialize folder
 	if not os.path.isdir(os.path.join('phones', lang)):
-        os.mkdir(os.path.join('phones', lang))
-    for phone in phone_dict:
-    	np_array = np.array(phone_dict[phone])
-    	write_name = os.path.join('phones', lang, filename+phone+'.npy')
-    	np.save(write_name, np_array)
+		os.mkdir(os.path.join('phones', lang))
+	for phone in phone_dict:
+		np_array = np.array(phone_dict[phone])
+		write_name = os.path.join('phones', lang, filename+phone+'.npy')
+		np.save(write_name, np_array)
 
 if __name__=='__main__':
 	aligndir = 'alignments'
