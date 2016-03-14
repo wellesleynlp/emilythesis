@@ -51,7 +51,8 @@ if __name__=='__main__':
 	speechdir = 'cslu_fae_corpus/npytxt'
 	homedir = sys.argv[1]
 
-	for lang in os.listdir(os.path.join(homedir, "cslu_fae_corpus/speech")):
+	# for lang in os.listdir(os.path.join(homedir, "cslu_fae_corpus/speech")):
+	for lang in ['AR', 'CZ', 'IN']:
 		for filename in os.listdir(os.path.join(homedir, "cslu_fae_corpus/speech/" + lang)):
 			if filename.endswith('.wav'):
 				tg = textgrid.TextGrid()
