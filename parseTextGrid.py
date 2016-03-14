@@ -19,8 +19,8 @@ def create_phone_dict(file_data, tg):
 	phone_dict = {}
 
 	for intv in tg.tiers[0].intervals:
-		plp_starti = intv.minTime*100
-		plp_endi = intv.maxTime*100
+		plp_starti = int(intv.minTime*100)
+		plp_endi = int(intv.maxTime*100)
 		plp_ft = [] #2-D array
 		for window in range(plp_starti, plp_endi):
 			#insert 52-D vector for that window
@@ -34,21 +34,21 @@ def create_phone_dict(file_data, tg):
 	# break # test only for 1st intv
 	return phone_dict
 
-def phone_dict_tofile(phone_dict, lang, filename):
+def phone_dict_tofile(phone_dict, lang, filename, homedir):
 	""" For 1 file and its phone dict, store information in folder under phones/lang, 
 		with the format: filename+phone+.npy
 	"""
 	# initialize folder
-	if not os.path.isdir(os.path.join('phones', lang)):
-		os.mkdir(os.path.join('phones', lang))
+	if not os.path.isdir(os.path.join(homedir, 'phones', lang)):
+		os.makedirs(os.path.join(homedir, 'phones', lang))
 	for phone in phone_dict:
 		np_array = np.array(phone_dict[phone])
-		write_name = os.path.join('phones', lang, filename+phone+'.npy')
+		write_name = os.path.join(homedir, 'phones', lang, filename+phone+'.npy')
 		np.save(write_name, np_array)
 
 if __name__=='__main__':
 	aligndir = 'alignments'
-	speechdir = 'cslu_fae_corpus/npytxt'
+	speechdir = 'cslu_fae_corpus/plptxt'
 	homedir = sys.argv[1]
 
 	# for lang in os.listdir(os.path.join(homedir, "cslu_fae_corpus/speech")):
@@ -56,9 +56,10 @@ if __name__=='__main__':
 		for filename in os.listdir(os.path.join(homedir, "cslu_fae_corpus/speech/" + lang)):
 			if filename.endswith('.wav'):
 				tg = textgrid.TextGrid()
-				tg.read(os.path.join(aligndir, lang, filename+'.TextGrid'))
+				file_noext = os.path.splitext(filename)[0]
+				tg.read(os.path.join(aligndir, lang, file_noext+'.TextGrid'))
 
 				# file_data is np matrix, where each index represents 10ms (or 0.01 sec)
-				file_data = np.load(os.path.join(homedir, speechdir, lang, filename+'.npytxt'))
+				file_data = np.loadtxt(os.path.join(homedir, speechdir, lang, file_noext+'.npytxt'))
 				phone_dict = create_phone_dict(file_data, tg)
-				phone_dict_tofile(phone_dict, lang, filename)
+				phone_dict_tofile(phone_dict, lang, file_noext, homedir+'/cslu_fae_corpus')
