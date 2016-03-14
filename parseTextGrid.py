@@ -51,11 +51,11 @@ if __name__=='__main__':
 	speechdir = 'cslu_fae_corpus/npytxt'
 	homedir = sys.argv[1]
 
-	for lang in os.listdir("cslu_fae_corpus/speech"):
-		for filename in os.listdir(homedir, "cslu_fae_corpus/speech/" + lang):
+	for lang in os.listdir(os.path.join(homedir, "cslu_fae_corpus/speech")):
+		for filename in os.listdir(os.path.join(homedir, "cslu_fae_corpus/speech/" + lang)):
 			if filename.endswith('.wav'):
 				tg = textgrid.TextGrid()
-				tg.read(os.path.join(homedir, aligndir, lang, filename+'.TextGrid'))
+				tg.read(os.path.join(aligndir, lang, filename+'.TextGrid'))
 
 				# file_data is np matrix, where each index represents 10ms (or 0.01 sec)
 				file_data = np.load(os.path.join(homedir, speechdir, lang, filename+'.npytxt'))
