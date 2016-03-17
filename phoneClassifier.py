@@ -2,10 +2,10 @@ from __future__ import division
 
 __author__='Emily Ahn and Sravana Reddy'
 
-""" Date created: 10/29/2015
-    Date modified: 11/14/2015
+""" Date created: 3/17/2016
+    Date modified: 3/17/2016
     ****************************
-    Accent classification using separate GMMs for each accent. 
+    Transcribed, phone-based accent classification, using separate GMMs for each accent. 
     See http://www.ece.mcgill.ca/~rrose1/papers/reynolds_rose_sap95.pdf for outline of process.
 """
 
@@ -15,6 +15,7 @@ import os
 import sys
 from sklearn.metrics import confusion_matrix
 
+''' training stays same for phone classification '''
 def train_model(speech_array_list, n_components, covar_type): 
     """train GMM with n_components mixtures from data,
     represented as a list of arrays, where each array contains the
@@ -32,19 +33,28 @@ def apply_model(gmm_model, speech_array):
     # assume that each time stamp's log-probs are INDEPENDENT
     return np.sum(gmm_model.score(speech_array))
 
-def load_data(npzdir, langlist):
+''' modified '''
+def load_data(phonedir, langlist):
     data = {}
     # for each Lang, create dictionary in "data"                                                     
     for li, lang in enumerate(langlist):
-        with np.load(os.path.join(npzdir, lang+'.npz')) as x:
-            data[lang] = dict(x)
+        data[lang] = {}
+        # each lang has a dictionary of phones corresponding to 
+        for filename in os.listdir(os.path.join(phonedir, lang)):
+            phone = os.path.splitext(filename)[0][8:] # only grab phone
+            file_noext = os.path.splitext(filename)[0][:8] # only grab filename
+            if phone not in data[lang]:
+                data[lang][phone] = {} # dictionary to insert phones from this 1 file
+            if not phone is 'sil' and not phone is '': # ignore TextGrid phones 'sil' and ''
+                data[lang][phone][file_noext] = np.load(os.path.join(phonedir, lang, filename))
         print 'Loaded compressed data for', lang
     return data
 
-def get_train_data(data, lang):
-    """return list of PLP arrays corresponding to filenames in training for this lang"""
+''' modified '''
+def get_train_data(data, lang, phone):
+    """return list of PLP arrays corresponding to 1 phone for filenames in training for this lang"""
     train_files = open(os.path.join('traintestsplit', lang+'.trainlist')).read().split()
-    return [data[lang][filename+'.npytxt'] for filename in train_files]
+    return [data[lang][phone][file_noext] for file_noext in train_files]
 
 def run_test(models, data):
     """apply trained models to each file in test data"""
@@ -69,7 +79,6 @@ def run_test(models, data):
                 num_correct += 1
             num_total += 1
 
-    print
     print 'Accuracy', num_correct*100/num_total
 
     #CONFUSION MATRIX (y_test, y_pred) -> (actual label, predictions)                                   
@@ -85,21 +94,23 @@ def run_test(models, data):
 
 if __name__=='__main__':
     """load .npz data, split into train-test folds, run training and testing"""
-    npzdir = sys.argv[1] #'cslu_fae_corpus/npz' # directory with npz files
+    phonedir = sys.argv[1] #'cslu_fae_corpus/npz' # directory with npz files
     n_components = int(sys.argv[2])  # number of GMM components
     covar = sys.argv[3]    # covar types: ['spherical', 'diag', 'tied', 'full']
 
-    #langlist = ['AR', 'MA', 'HI']
-    #langlist = ['HU', 'PO', 'RU']
-    #langlist = ['JA', 'KO']
-    langlist = ['AR','BP','CA','CZ','FA','FR','GE','HI','HU','IN','IT','JA','KO','MA','MY','PO','PP','RU','SD','SP','SW','TA','VI']
+    #langlist = ['AR','BP','CA','CZ','FA','FR','GE','HI','HU','IN','IT','JA','KO','MA','MY','PO','PP','RU','SD','SP','SW','TA','VI']
+    langlist = ['AR', 'CZ', 'IN']
 
-    data = load_data(npzdir, langlist)
+    data = load_data(phonedir, langlist)
     
     models = {}   # store trained models for each lang
     for li, lang in enumerate(langlist):
-        train_lang_list = get_train_data(data, lang)
-        models[lang] = train_model(train_lang_list, n_components, covar)
+        
+        models[lang] = {}
+        for phone in data[lang]:
+            train_lang_list = get_train_data(data, lang, phone)
+            ''' CONTINUE MODIFICATIONS HERE '''
+            models[lang][phone] = train_model(train_lang_list, n_components, covar)
         print 'Trained model for', lang
     
     # now test
