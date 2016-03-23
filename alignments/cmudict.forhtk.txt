@@ -91,7 +91,7 @@ abaco  AE1 B AH0 K OW2
 abacus  AE1 B AH0 K AH0 S
 abad  AH0 B AA1 D
 abadaka  AH0 B AE1 D AH0 K AH0
-abadi  AH0 B AE1bD IY0
+abadi  AH0 B AE1 D IY0
 abadie  AH0 B AE1 D IY0
 abair  AH0 B EH1 R
 abalkin  AH0 B AA1 L K IH0 N
@@ -9715,8 +9715,8 @@ bentzen  B EH1 N T Z AH0 N
 benveniste  B EH0 N V EH0 N IY1 S T IY0
 benvenuti  B EH0 N V EH0 N UW1 T IY0
 benvenuto  B EH0 N V EH0 N UW1 T OW0
-benware  B EH1 N W EH0 R
 benwar  B EH1 N W AA0 R
+benware  B EH1 N W EH0 R
 benway  B EH1 N W EY2
 benyamin  B EH2 N Y AH0 M IY1 N
 benyo  B EY1 N Y OW0
@@ -10693,9 +10693,9 @@ bilyk  B IH1 L IH0 K
 bilzerian  B IH0 L Z EH1 R IY0 AH0 N
 bilzerian\'s  B IH0 L Z EH1 R IY0 AH0 N Z
 bima  B IY1 M AH0
-bimechanics  B AY1 M EH1 K AE2 N IH0 K S
 bimbo  B IH1 M B OW0
 bimbos  B IH1 M B OW0 S
+bimechanics  B AY1 M EH1 K AE2 N IH0 K S
 bimini  B IH1 M AH0 N IY0
 bimodal  B AY0 M OW1 D AH0 L
 bimonthly  B AY0 M AH1 N TH L IY0
@@ -23649,7 +23649,7 @@ cornfields  K AO1 R N F IY1 L D Z
 cornflower  K AO1 R N F L AW2 ER0
 cornflowers  K AO1 R N F L AW2 ER0 Z
 cornforth  K AO1 R N F ER0 TH
-cornholio  K A01 R N HH OW2 L IY0 OW0
+cornholio  K AO1 R N HH OW2 L IY0 OW0
 cornhusk  K AO1 R N HH AH2 S K
 cornhusking  K AO1 R N HH AH2 S K IH0 NG
 cornhusks  K AO1 R N HH AH2 S K S
@@ -36252,7 +36252,7 @@ euchre  Y UW1 K ER0
 euchred  Y UW1 K ER0 D
 euclea  Y UW1 K L IY0 AH0
 euclid  Y UW1 K L IH0 D
-eudanel  Y UW1 DA AH0 N EH0 L
+eudanel  Y UW1 D AH0 N EH0 L
 eudocia  Y UW0 D OW1 CH AH0
 eudora  Y UW0 D AO1 R AH0
 eudosia  Y UW0 D OW1 S IY0 AH0
@@ -71372,7 +71372,7 @@ meadows  M EH1 D OW2 Z
 meads  M IY1 D Z
 meager  M IY1 G ER0
 meagher  M AA1 R
-meahone  M IY1 AH0 H OW0 N
+meahone  M IY1 AH0 HH OW0 N
 meaker  M IY1 K ER0
 meakin  M IY1 K IH0 N
 meal  M IY1 L
@@ -119471,8 +119471,8 @@ walrath  W AO1 L R AH0 TH
 walraven  W AO1 L R EY2 V AH0 N
 walrod  W AO1 L R AA0 D
 walrus  W AO1 L R AH0 S
-walrush  W AO1 L R AH0 SH
 walruses  W AA1 L R AH0 S IH0 Z
+walrush  W AO1 L R AH0 SH
 walser  W AO1 L Z ER0
 walsh  W AO1 L SH
 walsh\'s  W AO1 L SH IH0 Z

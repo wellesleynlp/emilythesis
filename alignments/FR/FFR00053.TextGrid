@@ -1,0 +1,524 @@
+File type = "ooTextFile"
+Object class = "TextGrid"
+
+xmin = 0.0
+xmax = 20.46
+tiers? <exists>
+size = 2
+item []:
+	item [1]:
+		class = "IntervalTier"
+		name = "phone"
+		xmin = 0.0
+		xmax = 20.46
+		intervals: size = 87
+			intervals [1]:
+				xmin = 0.0
+				xmax = 5.65
+				text = "sil"
+			intervals [2]:
+				xmin = 5.65
+				xmax = 5.91
+				text = "AY1"
+			intervals [3]:
+				xmin = 5.91
+				xmax = 6.09
+				text = ""
+			intervals [4]:
+				xmin = 6.09
+				xmax = 6.14
+				text = "K"
+			intervals [5]:
+				xmin = 6.14
+				xmax = 6.33
+				text = "AH0"
+			intervals [6]:
+				xmin = 6.33
+				xmax = 6.54
+				text = "N"
+			intervals [7]:
+				xmin = 6.54
+				xmax = 6.57
+				text = "N"
+			intervals [8]:
+				xmin = 6.57
+				xmax = 6.7
+				text = "AA1"
+			intervals [9]:
+				xmin = 6.7
+				xmax = 7.05
+				text = "T"
+			intervals [10]:
+				xmin = 7.05
+				xmax = 7.24
+				text = ""
+			intervals [11]:
+				xmin = 7.24
+				xmax = 7.27
+				text = "S"
+			intervals [12]:
+				xmin = 7.27
+				xmax = 7.32
+				text = "P"
+			intervals [13]:
+				xmin = 7.32
+				xmax = 7.44
+				text = "IY1"
+			intervals [14]:
+				xmin = 7.44
+				xmax = 7.53
+				text = "K"
+			intervals [15]:
+				xmin = 7.53
+				xmax = 7.62
+				text = ""
+			intervals [16]:
+				xmin = 7.62
+				xmax = 7.79
+				text = "V"
+			intervals [17]:
+				xmin = 7.79
+				xmax = 7.86
+				text = "EH1"
+			intervals [18]:
+				xmin = 7.86
+				xmax = 7.89
+				text = "R"
+			intervals [19]:
+				xmin = 7.89
+				xmax = 8.01
+				text = "IY0"
+			intervals [20]:
+				xmin = 8.01
+				xmax = 8.13
+				text = "W"
+			intervals [21]:
+				xmin = 8.13
+				xmax = 8.26
+				text = "EH1"
+			intervals [22]:
+				xmin = 8.26
+				xmax = 8.46
+				text = "L"
+			intervals [23]:
+				xmin = 8.46
+				xmax = 8.55
+				text = "IH1"
+			intervals [24]:
+				xmin = 8.55
+				xmax = 8.69
+				text = "N"
+			intervals [25]:
+				xmin = 8.69
+				xmax = 8.73
+				text = ""
+			intervals [26]:
+				xmin = 8.73
+				xmax = 8.91
+				text = "IH1"
+			intervals [27]:
+				xmin = 8.91
+				xmax = 9.0
+				text = "NG"
+			intervals [28]:
+				xmin = 9.0
+				xmax = 9.03
+				text = "L"
+			intervals [29]:
+				xmin = 9.03
+				xmax = 9.53
+				text = "IH0"
+			intervals [30]:
+				xmin = 9.53
+				xmax = 9.57
+				text = "SH"
+			intervals [31]:
+				xmin = 9.57
+				xmax = 9.92
+				text = ""
+			intervals [32]:
+				xmin = 9.92
+				xmax = 10.03
+				text = "B"
+			intervals [33]:
+				xmin = 10.03
+				xmax = 10.12
+				text = "IH0"
+			intervals [34]:
+				xmin = 10.12
+				xmax = 10.26
+				text = "K"
+			intervals [35]:
+				xmin = 10.26
+				xmax = 10.55
+				text = "AO1"
+			intervals [36]:
+				xmin = 10.55
+				xmax = 10.7
+				text = "Z"
+			intervals [37]:
+				xmin = 10.7
+				xmax = 11.13
+				text = "AY1"
+			intervals [38]:
+				xmin = 11.13
+				xmax = 11.61
+				text = ""
+			intervals [39]:
+				xmin = 11.61
+				xmax = 12.5
+				text = "AY1"
+			intervals [40]:
+				xmin = 12.5
+				xmax = 13.65
+				text = ""
+			intervals [41]:
+				xmin = 13.65
+				xmax = 13.7
+				text = "HH"
+			intervals [42]:
+				xmin = 13.7
+				xmax = 14.09
+				text = "AE1"
+			intervals [43]:
+				xmin = 14.09
+				xmax = 14.18
+				text = "V"
+			intervals [44]:
+				xmin = 14.18
+				xmax = 14.29
+				text = "N"
+			intervals [45]:
+				xmin = 14.29
+				xmax = 14.34
+				text = "OW1"
+			intervals [46]:
+				xmin = 14.34
+				xmax = 14.72
+				text = "T"
+			intervals [47]:
+				xmin = 14.72
+				xmax = 14.75
+				text = "IY1"
+			intervals [48]:
+				xmin = 14.75
+				xmax = 14.78
+				text = "CH"
+			intervals [49]:
+				xmin = 14.78
+				xmax = 14.92
+				text = "ER0"
+			intervals [50]:
+				xmin = 14.92
+				xmax = 15.01
+				text = "F"
+			intervals [51]:
+				xmin = 15.01
+				xmax = 15.09
+				text = "R"
+			intervals [52]:
+				xmin = 15.09
+				xmax = 15.13
+				text = "ER0"
+			intervals [53]:
+				xmin = 15.13
+				xmax = 15.18
+				text = "DH"
+			intervals [54]:
+				xmin = 15.18
+				xmax = 15.44
+				text = "AH0"
+			intervals [55]:
+				xmin = 15.44
+				xmax = 15.5
+				text = "T"
+			intervals [56]:
+				xmin = 15.5
+				xmax = 16.1
+				text = ""
+			intervals [57]:
+				xmin = 16.1
+				xmax = 16.67
+				text = "AY1"
+			intervals [58]:
+				xmin = 16.67
+				xmax = 16.83
+				text = ""
+			intervals [59]:
+				xmin = 16.83
+				xmax = 16.91
+				text = "K"
+			intervals [60]:
+				xmin = 16.91
+				xmax = 17.02
+				text = "AH0"
+			intervals [61]:
+				xmin = 17.02
+				xmax = 17.35
+				text = "N"
+			intervals [62]:
+				xmin = 17.35
+				xmax = 17.39
+				text = ""
+			intervals [63]:
+				xmin = 17.39
+				xmax = 17.49
+				text = "R"
+			intervals [64]:
+				xmin = 17.49
+				xmax = 17.68
+				text = "IY1"
+			intervals [65]:
+				xmin = 17.68
+				xmax = 17.85
+				text = "D"
+			intervals [66]:
+				xmin = 17.85
+				xmax = 17.88
+				text = ""
+			intervals [67]:
+				xmin = 17.88
+				xmax = 18.01
+				text = "DH"
+			intervals [68]:
+				xmin = 18.01
+				xmax = 18.19
+				text = "IY0"
+			intervals [69]:
+				xmin = 18.19
+				xmax = 18.43
+				text = ""
+			intervals [70]:
+				xmin = 18.43
+				xmax = 18.63
+				text = "N"
+			intervals [71]:
+				xmin = 18.63
+				xmax = 18.72
+				text = "UW1"
+			intervals [72]:
+				xmin = 18.72
+				xmax = 18.82
+				text = "Z"
+			intervals [73]:
+				xmin = 18.82
+				xmax = 18.94
+				text = "P"
+			intervals [74]:
+				xmin = 18.94
+				xmax = 19.04
+				text = "EY2"
+			intervals [75]:
+				xmin = 19.04
+				xmax = 19.19
+				text = "P"
+			intervals [76]:
+				xmin = 19.19
+				xmax = 19.44
+				text = "ER0"
+			intervals [77]:
+				xmin = 19.44
+				xmax = 19.8
+				text = ""
+			intervals [78]:
+				xmin = 19.8
+				xmax = 19.93
+				text = "AY1"
+			intervals [79]:
+				xmin = 19.93
+				xmax = 20.1
+				text = "K"
+			intervals [80]:
+				xmin = 20.1
+				xmax = 20.17
+				text = "AE1"
+			intervals [81]:
+				xmin = 20.17
+				xmax = 20.25
+				text = "N"
+			intervals [82]:
+				xmin = 20.25
+				xmax = 20.28
+				text = "T"
+			intervals [83]:
+				xmin = 20.28
+				xmax = 20.32
+				text = "AH1"
+			intervals [84]:
+				xmin = 20.32
+				xmax = 20.37
+				text = "N"
+			intervals [85]:
+				xmin = 20.37
+				xmax = 20.41
+				text = "D"
+			intervals [86]:
+				xmin = 20.41
+				xmax = 20.44
+				text = "ER0"
+			intervals [87]:
+				xmin = 20.44
+				xmax = 20.46
+				text = "sil"
+	item [2]:
+		class = "IntervalTier"
+		name = "word"
+		xmin = 0.0
+		xmax = 20.46
+		intervals: size = 39
+			intervals [1]:
+				xmin = 0.0
+				xmax = 5.65
+				text = "sil"
+			intervals [2]:
+				xmin = 5.65
+				xmax = 5.91
+				text = "i"
+			intervals [3]:
+				xmin = 5.91
+				xmax = 6.09
+				text = "sp"
+			intervals [4]:
+				xmin = 6.09
+				xmax = 6.54
+				text = "can"
+			intervals [5]:
+				xmin = 6.54
+				xmax = 7.05
+				text = "not"
+			intervals [6]:
+				xmin = 7.05
+				xmax = 7.24
+				text = "sp"
+			intervals [7]:
+				xmin = 7.24
+				xmax = 7.53
+				text = "speak"
+			intervals [8]:
+				xmin = 7.53
+				xmax = 7.62
+				text = "sp"
+			intervals [9]:
+				xmin = 7.62
+				xmax = 8.01
+				text = "very"
+			intervals [10]:
+				xmin = 8.01
+				xmax = 8.46
+				text = "well"
+			intervals [11]:
+				xmin = 8.46
+				xmax = 8.69
+				text = "in"
+			intervals [12]:
+				xmin = 8.69
+				xmax = 8.73
+				text = "sp"
+			intervals [13]:
+				xmin = 8.73
+				xmax = 9.57
+				text = "english"
+			intervals [14]:
+				xmin = 9.57
+				xmax = 9.92
+				text = "sp"
+			intervals [15]:
+				xmin = 9.92
+				xmax = 10.7
+				text = "because"
+			intervals [16]:
+				xmin = 10.7
+				xmax = 11.13
+				text = "i"
+			intervals [17]:
+				xmin = 11.13
+				xmax = 11.61
+				text = "sp"
+			intervals [18]:
+				xmin = 11.61
+				xmax = 12.5
+				text = "i"
+			intervals [19]:
+				xmin = 12.5
+				xmax = 13.65
+				text = "sp"
+			intervals [20]:
+				xmin = 13.65
+				xmax = 14.18
+				text = "have"
+			intervals [21]:
+				xmin = 14.18
+				xmax = 14.34
+				text = "no"
+			intervals [22]:
+				xmin = 14.34
+				xmax = 14.92
+				text = "teacher"
+			intervals [23]:
+				xmin = 14.92
+				xmax = 15.13
+				text = "for"
+			intervals [24]:
+				xmin = 15.13
+				xmax = 15.5
+				text = "that"
+			intervals [25]:
+				xmin = 15.5
+				xmax = 16.1
+				text = "sp"
+			intervals [26]:
+				xmin = 16.1
+				xmax = 16.67
+				text = "i"
+			intervals [27]:
+				xmin = 16.67
+				xmax = 16.83
+				text = "sp"
+			intervals [28]:
+				xmin = 16.83
+				xmax = 17.35
+				text = "can"
+			intervals [29]:
+				xmin = 17.35
+				xmax = 17.39
+				text = "sp"
+			intervals [30]:
+				xmin = 17.39
+				xmax = 17.85
+				text = "read"
+			intervals [31]:
+				xmin = 17.85
+				xmax = 17.88
+				text = "sp"
+			intervals [32]:
+				xmin = 17.88
+				xmax = 18.19
+				text = "the"
+			intervals [33]:
+				xmin = 18.19
+				xmax = 18.43
+				text = "sp"
+			intervals [34]:
+				xmin = 18.43
+				xmax = 19.44
+				text = "newspaper"
+			intervals [35]:
+				xmin = 19.44
+				xmax = 19.8
+				text = "sp"
+			intervals [36]:
+				xmin = 19.8
+				xmax = 19.93
+				text = "i"
+			intervals [37]:
+				xmin = 19.93
+				xmax = 20.28
+				text = "can't"
+			intervals [38]:
+				xmin = 20.28
+				xmax = 20.44
+				text = "under"
+			intervals [39]:
+				xmin = 20.44
+				xmax = 20.46
+				text = "sil"
