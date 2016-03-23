@@ -92,7 +92,8 @@ if __name__=='__main__':
     #langlist = ['AR', 'MA', 'HI']
     #langlist = ['HU', 'PO', 'RU']
     #langlist = ['JA', 'KO']
-    langlist = ['AR','BP','CA','CZ','FA','FR','GE','HI','HU','IN','IT','JA','KO','MA','MY','PO','PP','RU','SD','SP','SW','TA','VI']
+    #langlist = ['AR','BP','CA','CZ','FA','FR','GE','HI','HU','IN','IT','JA','KO','MA','MY','PO','PP','RU','SD','SP','SW','TA','VI']
+    langlist = ['AR', 'CZ', 'IN']
 
     data = load_data(npzdir, langlist)
     

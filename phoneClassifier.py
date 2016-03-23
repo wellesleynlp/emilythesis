@@ -15,6 +15,7 @@ import os
 import sys
 #from sklearn.metrics import confusion_matrix
 import time
+from collections import defaultdict
 
 def train_model(speech_array_list, n_components, covar_type): 
     """train GMM with n_components mixtures from data,
@@ -76,34 +77,43 @@ def run_test(models, data):
     actual_labels = []
     langlist = models.keys()
     for ai, actual_lang in enumerate(langlist):
+        lang_correct = 0.0
+        lang_total = 0.0
         test_files = open(os.path.join('traintestsplit', actual_lang+'.testlist')).read().split()
         for filename in test_files:
-            predictions = {}
-            logprobs = {}   # dict: total log prob of this file under each model                    
+            predictions = defaultdict(int)
+            logprobs = defaultdict(dict)   # dict: total log prob of this file under each model                    
             for test_lang in langlist:
                 #logprobs[test_lang] = {}
                 for phone in data[test_lang]:
                     #check for existence. so far do nothing if phone is not in training or models
                     if phone in models[test_lang] and phone in data[actual_lang]: 
                         if filename in data[actual_lang][phone]: #check (e.g. not all AR phones are in this 1 AR file)
-                            logprobs[phone] = {}
+                            
                             logprobs[phone][test_lang] = apply_model(models[test_lang][phone], data[actual_lang][phone][filename])
                             
-                            predictions[phone] = max(logprobs[phone].items(), key=lambda x:x[1])[0]
-            print 'PREDICIONS FOR', filename, predictions
+                            #predictions[phone] = max(logprobs[phone].items(), key=lambda x:x[1])[0]
+            for phone in logprobs:
+                #predictions[phone] = max(logprobs[phone].items(), key=lambda x:x[1])[0]
+                for test_lang in langlist:
+                    predictions[test_lang] += logprobs[phone][test_lang] 
+            
+            predicted_lang = max(predictions.items(), key=lambda x:x[1])[0]
+            print 'PREDICIONS FOR', filename, predicted_lang
             #print actual_lang, "LOGPROBS:", logprobs
             
-            '''
             # insert prediction (of lang index) into predicted list                                     
-            predicted_labels.append(langlist.index(predicted_lang))
-            actual_labels.append(ai)
+
             if actual_lang == predicted_lang:
                 num_correct += 1
+                lang_correct += 1
             num_total += 1
+            lang_total += 1
+        print 'results for', actual_lang, lang_correct*100/lang_total
 
     print 'Accuracy', num_correct*100/num_total
 
-    #CONFUSION MATRIX (y_test, y_pred) -> (actual label, predictions)                                   
+''' #CONFUSION MATRIX (y_test, y_pred) -> (actual label, predictions)                                   
     cm = confusion_matrix(actual_labels, predicted_labels)
     cm_normalized = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
     # display confusion stats by lang (TODO: visualize with matplotlib)                                 
@@ -121,7 +131,7 @@ if __name__=='__main__':
     covar = sys.argv[3]    # covar types: ['spherical', 'diag', 'tied', 'full']
     #langlist = ['AR','BP','CA','CZ','FA','FR','GE','HI','HU','IN','IT','JA','KO','MA','MY','PO','PP','RU','SD','SP','SW','TA','VI']
     langlist = ['AR', 'CZ', 'IN']
-    langlist = ['AR', 'CZ']
+    #langlist = ['AR', 'CZ']
     
     start = time.time()
     print "START"
