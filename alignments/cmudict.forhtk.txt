@@ -8250,12 +8250,12 @@ barz  B AA1 R Z
 bas-relief  B AA1 S R IY0 L IY1 F
 bas-reliefs  B AA1 S R IY0 L IY1 F S
 basa  B AA1 S AH0
-basani  B AH0 S AA1 N IY0
 basal  B EY1 S AH0 L
 basaldua  B AA0 S AA0 L D UW1 AH0
 basalt  B AH0 S AO1 L T
 basalts  B AH0 S AO1 L T S
 basam  B AH0 S AA1 M
+basani  B AH0 S AA1 N IY0
 basara  B AH0 S EH1 R AH0
 basara\'s  B AH0 S EH1 R AH0 Z
 basayev  B AE1 S AA0 Y EH2 V
@@ -100755,7 +100755,7 @@ senty  S EH1 N T IY0
 sentz  S EH1 N T S
 senzaki  S EY0 N Z AA1 K IY0
 seo  S IY1 OW0
-seole  
+seole  S IY1 OW0 L  
 seoul  S OW1 L
 seoul\'s  S OW1 L Z
 seow  S IY1 OW0
