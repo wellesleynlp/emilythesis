@@ -3,7 +3,7 @@ from __future__ import division
 __author__='Emily Ahn and Sravana Reddy'
 
 """ Date created: 3/17/2016
-    Date modified: 3/17/2016
+    Date modified: 3/28/2016
     ****************************
     Transcribed, phone-based accent classification, using separate GMMs for each accent. 
     See http://www.ece.mcgill.ca/~rrose1/papers/reynolds_rose_sap95.pdf for outline of process.
@@ -21,15 +21,12 @@ def train_model(speech_array_list, n_components, covar_type):
     """train GMM with n_components mixtures from data,
     represented as a list of arrays, where each array contains the
     PLPs from a speech file. Returns this model."""
-    #print "SPEECH ARRAY LIST type [0]", type(speech_array_list[0])
     bigArray = np.vstack(speech_array_list)
     g = GMM(n_components=n_components,covariance_type=covar_type)
-    #g.fit(speech_array_list)
     g.fit(bigArray)
     return g
 
 def apply_model(gmm_model, speech_array):
-    # given 1 speaker (1 file), figure out
     """compute total log probability (sum across all rows) of
     speech_array under this model"""
     # assume that each time stamp's log-probs are INDEPENDENT
@@ -45,14 +42,14 @@ def load_data(phonedir, langlist):
         for filename in os.listdir(os.path.join(phonedir, lang)):
             phone = os.path.splitext(filename)[0][8:] # only grab phone
             file_noext = os.path.splitext(filename)[0][:8] # only grab filename
-            if not phone=='sil' and not phone=='': # ignore TextGrid phones 'sil' and ''
-                # remove stress distinction for vowels. Ex. 'AA1' -> 'AA'
-                if len(phone)==3:
-                    phone = phone[:2]
-                if not phone in data[lang]:
-                    data[lang][phone] = {}
-                #data[lang][phone][file_noext] = np.load(os.path.join(phonedir, lang, filename))
-                data[lang][phone][file_noext] = list(np.load(os.path.join(phonedir, lang, filename)))
+            # if not phone=='sil' and not phone=='': # ignore TextGrid phones 'sil' and ''
+            # remove stress distinction for vowels. Ex. 'AA1' -> 'AA'
+            if len(phone)==3:
+                phone = phone[:2]
+            if not phone in data[lang]:
+                data[lang][phone] = {}
+            #data[lang][phone][file_noext] = np.load(os.path.join(phonedir, lang, filename))
+            data[lang][phone][file_noext] = list(np.load(os.path.join(phonedir, lang, filename)))
 
         print 'Loaded compressed data for', lang, time.time() - langstart
     return data
@@ -60,11 +57,6 @@ def load_data(phonedir, langlist):
 def get_train_data(data, lang, phone):
     """return list of PLP arrays corresponding to 1 phone for filenames in training for this lang"""
     train_files = open(os.path.join('traintestsplit', lang+'.trainlist')).read().split()
-    #train_data = []
-    #for file_noext in train_files:
-    #    if file_noext in data[lang][phone]: #check if this file has this phone, else skip
-    #        train_data.append(data[lang][phone][file_noext])
-    #return train_data
     return [data[lang][phone][file_noext] for file_noext in train_files if file_noext in data[lang][phone]]
 
 def run_test(models, data):
@@ -92,11 +84,10 @@ def run_test(models, data):
                             
                             logprobs[phone][test_lang] = apply_model(models[test_lang][phone], data[actual_lang][phone][filename])
                             
-                            #predictions[phone] = max(logprobs[phone].items(), key=lambda x:x[1])[0]
             for phone in logprobs:
-                #predictions[phone] = max(logprobs[phone].items(), key=lambda x:x[1])[0]
                 for test_lang in langlist:
-                    predictions[test_lang] += logprobs[phone][test_lang] 
+                    if test_lang in logprobs[phone]: # check if this phone exists in this lang's training data
+                        predictions[test_lang] += logprobs[phone][test_lang]
             
             predicted_lang = max(predictions.items(), key=lambda x:x[1])[0]
             print 'PREDICIONS FOR', filename, predicted_lang
@@ -126,13 +117,15 @@ def run_test(models, data):
 
 if __name__=='__main__':
     """load .npy data, split into train-test folds, run training and testing"""
-    phonedir = sys.argv[1] #'cslu_fae_corpus/npz' # directory with npz files
+    phonedir = sys.argv[1] #'cslu_fae_corpus/phones' # directory with folders of lang phones
     n_components = int(sys.argv[2])  # number of GMM components
     covar = sys.argv[3]    # covar types: ['spherical', 'diag', 'tied', 'full']
     #langlist = ['AR','BP','CA','CZ','FA','FR','GE','HI','HU','IN','IT','JA','KO','MA','MY','PO','PP','RU','SD','SP','SW','TA','VI']
-    langlist = ['AR', 'CZ', 'IN']
-    #langlist = ['AR', 'CZ']
-    
+    #langlist = ['AR', 'CZ', 'IN']
+    langlist = ['KO', 'MA']
+    #langlist = ['AR', 'CZ', 'FR', 'HI', 'KO', 'IN', 'MA']
+    #langlist = ['FR', 'HI', 'KO', 'MA']
+
     start = time.time()
     print "START"
     
@@ -143,7 +136,6 @@ if __name__=='__main__':
         models[lang] = {}
         print "BEGIN TRAINING", lang
         for phone in data[lang]:
-            #print "PHONE:", phone
             train_langphone_list = get_train_data(data, lang, phone)
             if train_langphone_list: #only build a model if list is not empty
                 models[lang][phone] = train_model(train_langphone_list, n_components, covar)

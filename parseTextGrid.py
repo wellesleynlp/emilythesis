@@ -20,7 +20,7 @@ def create_phone_dict(file_data, tg):
 
 	for intv in tg.tiers[0].intervals:
 		# do not include '' and 'sil' intervals
-		if (not intv.mark=='') or (not intv.mark=='sil'):
+		if (not intv.mark=='') and (not intv.mark=='sil'):
 			plp_starti = int(intv.minTime*100)
 			plp_endi = int(intv.maxTime*100)
 			plp_ft = [] #2-D array
