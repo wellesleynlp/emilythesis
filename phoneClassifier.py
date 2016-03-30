@@ -122,9 +122,10 @@ if __name__=='__main__':
     covar = sys.argv[3]    # covar types: ['spherical', 'diag', 'tied', 'full']
     #langlist = ['AR','BP','CA','CZ','FA','FR','GE','HI','HU','IN','IT','JA','KO','MA','MY','PO','PP','RU','SD','SP','SW','TA','VI']
     #langlist = ['AR', 'CZ', 'IN']
-    langlist = ['KO', 'MA']
+    #langlist = ['KO', 'MA']
     #langlist = ['AR', 'CZ', 'FR', 'HI', 'KO', 'IN', 'MA']
     #langlist = ['FR', 'HI', 'KO', 'MA']
+    langlist = sys.argv[4:]
 
     start = time.time()
     print "START"
