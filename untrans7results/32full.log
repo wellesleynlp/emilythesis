@@ -1,0 +1,87 @@
+Loaded compressed data for MA
+Loaded compressed data for KO
+Loaded compressed data for IN
+Loaded compressed data for AR
+Loaded compressed data for HI
+Loaded compressed data for CZ
+Loaded compressed data for FR
+Testing 71 files from FR
+17 correct
+Testing 70 files from MA
+32 correct
+Testing 43 files from KO
+18 correct
+Testing 25 files from CZ
+5 correct
+Testing 28 files from AR
+9 correct
+Testing 87 files from HI
+35 correct
+Testing 24 files from IN
+6 correct
+
+Accuracy 35.0574712644
+********************
+FR confusion:
+FR: 23.94%
+MA: 26.76%
+KO: 16.90%
+CZ: 5.63%
+AR: 12.68%
+HI: 9.86%
+IN: 4.23%
+********************
+MA confusion:
+FR: 1.43%
+MA: 45.71%
+KO: 22.86%
+CZ: 7.14%
+AR: 7.14%
+HI: 8.57%
+IN: 7.14%
+********************
+KO confusion:
+FR: 4.65%
+MA: 32.56%
+KO: 41.86%
+CZ: 2.33%
+AR: 6.98%
+HI: 6.98%
+IN: 4.65%
+********************
+CZ confusion:
+FR: 12.00%
+MA: 16.00%
+KO: 4.00%
+CZ: 20.00%
+AR: 24.00%
+HI: 24.00%
+IN: 0.00%
+********************
+AR confusion:
+FR: 7.14%
+MA: 10.71%
+KO: 7.14%
+CZ: 7.14%
+AR: 32.14%
+HI: 32.14%
+IN: 3.57%
+********************
+HI confusion:
+FR: 2.30%
+MA: 14.94%
+KO: 16.09%
+CZ: 8.05%
+AR: 8.05%
+HI: 40.23%
+IN: 10.34%
+********************
+IN confusion:
+FR: 4.17%
+MA: 25.00%
+KO: 20.83%
+CZ: 0.00%
+AR: 16.67%
+HI: 8.33%
+IN: 25.00%
+********************
