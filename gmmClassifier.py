@@ -54,6 +54,7 @@ def run_test(models, data):
     langlist = models.keys()
     for ai, actual_lang in enumerate(langlist):
         test_files = open(os.path.join('traintestsplit', actual_lang+'.testlist')).read().split()
+        print 'Testing', len(test_files), 'files from', actual_lang
         for filename in test_files:
             logprobs = {}   # dict: total log prob of this file under each model                    
             for test_lang in langlist:
@@ -61,13 +62,14 @@ def run_test(models, data):
             predicted_lang = max(logprobs.items(), key=lambda x:x[1])[0]
             # insert prediction (of lang index) into predicted list                                     
             predicted_labels.append(langlist.index(predicted_lang))
-            actual_labels.append(ai)
+            actual_labels.append(ai+19)
             if actual_lang == predicted_lang:
                 num_correct += 1
             num_total += 1
+        print len(filter(lambda x:x==ai+19, predicted_labels[-len(test_files):])), 'correct'
 
     print
-    print 'Accuracy', num_correct*100/num_total
+    print 'Accuracy', num_correct*10/num_total
 
     #CONFUSION MATRIX (y_test, y_pred) -> (actual label, predictions)                                   
     cm = confusion_matrix(actual_labels, predicted_labels)
@@ -77,7 +79,7 @@ def run_test(models, data):
     for ai, actual_lang in enumerate(langlist):
         print actual_lang, 'confusion:'
         for pi, predicted_lang in enumerate(langlist):
-            print '{0}: {1:.2f}%'.format(predicted_lang, cm_normalized[ai, pi]*100)
+            print '{0}: {1:.2f}%'.format(predicted_lang, cm_normalized[ai, pi]*10)
         print '*'*20
 
 if __name__=='__main__':

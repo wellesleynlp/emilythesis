@@ -14,20 +14,21 @@ if __name__=='__main__':
     
     #load models
     models = {}
-    for lang in os.listdir(modeldir):
+    langlist = ['MA', 'KO', 'IN', 'AR', 'HI', 'CZ', 'FR']
+    for lang in langlist:
         if os.path.exists(os.path.join(modeldir, lang, 
                                        covar+'-'+n_components+'-'+lang+'.weights')):
-            models[lang] = GMM()
-            models[lang].weights_ = np.load(os.path.join(modeldir, lang,
-                                                     covar+'-'+n_components+'-'+lang+'.weights'))
+            models[lang] = GMM(n_components=int(n_components), covariance_type=covar)
+            models[lang].weights_ = np.load(os.path.join(modeldir, lang, 
+                                                         covar+'-'+n_components+'-'+lang+'.weights'))
             models[lang].means_ = np.load(os.path.join(modeldir, lang,
-                                                     covar+'-'+n_components+'-'+lang+'.means'))
+                                                       covar+'-'+n_components+'-'+lang+'.means'))
             models[lang].covars_ = np.load(os.path.join(modeldir, lang,
-                                                     covar+'-'+n_components+'-'+lang+'.covars'))
+                                                        covar+'-'+n_components+'-'+lang+'.covars'))
         else:
             print 'Error: model not trained with these parameters for', lang
     
     #load data
-    langlist = models.keys()
+    #langlist = models.keys()
     data = load_data(npzdir, langlist)
     run_test(models, data)
