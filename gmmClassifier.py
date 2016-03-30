@@ -2,8 +2,11 @@ from __future__ import division
 
 __author__='Emily Ahn and Sravana Reddy'
 
-"""Accent classification using separate GMMs for each accent. 
-See http://www.ece.mcgill.ca/~rrose1/papers/reynolds_rose_sap95.pdf for outline of process.
+""" Date created: 10/29/2015
+    Date modified: 11/14/2015
+    ****************************
+    Accent classification using separate GMMs for each accent. 
+    See http://www.ece.mcgill.ca/~rrose1/papers/reynolds_rose_sap95.pdf for outline of process.
 """
 
 import numpy as np
@@ -87,11 +90,13 @@ if __name__=='__main__':
     npzdir = sys.argv[1] #'cslu_fae_corpus/npz' # directory with npz files
     n_components = int(sys.argv[2])  # number of GMM components
     covar = sys.argv[3]    # covar types: ['spherical', 'diag', 'tied', 'full']
+    langlist = sys.argv[4:]
 
     #langlist = ['AR', 'MA', 'HI']
     #langlist = ['HU', 'PO', 'RU']
     #langlist = ['JA', 'KO']
-    langlist = ['AR','BP','CA','CZ','FA','FR','GE','HI','HU','IN','IT','JA','KO','MA','MY','PO','PP','RU','SD','SP','SW','TA','VI']
+    #langlist = ['AR','BP','CA','CZ','FA','FR','GE','HI','HU','IN','IT','JA','KO','MA','MY','PO','PP','RU','SD','SP','SW','TA','VI']
+    #langlist = ['AR', 'CZ', 'IN']
 
     data = load_data(npzdir, langlist)
     

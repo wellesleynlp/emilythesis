@@ -1,0 +1,148 @@
+File type = "ooTextFile"
+Object class = "TextGrid"
+
+xmin = 0.0
+xmax = 12.12
+tiers? <exists>
+size = 2
+item []:
+	item [1]:
+		class = "IntervalTier"
+		name = "phone"
+		xmin = 0.0
+		xmax = 12.12
+		intervals: size = 25
+			intervals [1]:
+				xmin = 0.0
+				xmax = 1.59
+				text = "sil"
+			intervals [2]:
+				xmin = 1.59
+				xmax = 1.79
+				text = "AY1"
+			intervals [3]:
+				xmin = 1.79
+				xmax = 2.15
+				text = "M"
+			intervals [4]:
+				xmin = 2.15
+				xmax = 3.39
+				text = ""
+			intervals [5]:
+				xmin = 3.39
+				xmax = 3.52
+				text = "R"
+			intervals [6]:
+				xmin = 3.52
+				xmax = 3.66
+				text = "IY0"
+			intervals [7]:
+				xmin = 3.66
+				xmax = 3.76
+				text = "S"
+			intervals [8]:
+				xmin = 3.76
+				xmax = 3.86
+				text = "P"
+			intervals [9]:
+				xmin = 3.86
+				xmax = 4.06
+				text = "AA1"
+			intervals [10]:
+				xmin = 4.06
+				xmax = 4.14
+				text = "N"
+			intervals [11]:
+				xmin = 4.14
+				xmax = 4.22
+				text = "S"
+			intervals [12]:
+				xmin = 4.22
+				xmax = 4.26
+				text = "AH0"
+			intervals [13]:
+				xmin = 4.26
+				xmax = 4.31
+				text = "B"
+			intervals [14]:
+				xmin = 4.31
+				xmax = 4.37
+				text = "AH0"
+			intervals [15]:
+				xmin = 4.37
+				xmax = 4.75
+				text = "L"
+			intervals [16]:
+				xmin = 4.75
+				xmax = 5.3
+				text = ""
+			intervals [17]:
+				xmin = 5.3
+				xmax = 5.33
+				text = "S"
+			intervals [18]:
+				xmin = 5.33
+				xmax = 5.37
+				text = "EH1"
+			intervals [19]:
+				xmin = 5.37
+				xmax = 5.4
+				text = "N"
+			intervals [20]:
+				xmin = 5.4
+				xmax = 5.43
+				text = "S"
+			intervals [21]:
+				xmin = 5.43
+				xmax = 5.46
+				text = "IH0"
+			intervals [22]:
+				xmin = 5.46
+				xmax = 5.49
+				text = "T"
+			intervals [23]:
+				xmin = 5.49
+				xmax = 5.52
+				text = "IH0"
+			intervals [24]:
+				xmin = 5.52
+				xmax = 5.55
+				text = "V"
+			intervals [25]:
+				xmin = 5.55
+				xmax = 12.12
+				text = "sil"
+	item [2]:
+		class = "IntervalTier"
+		name = "word"
+		xmin = 0.0
+		xmax = 12.12
+		intervals: size = 7
+			intervals [1]:
+				xmin = 0.0
+				xmax = 1.59
+				text = "sil"
+			intervals [2]:
+				xmin = 1.59
+				xmax = 2.15
+				text = "i'm"
+			intervals [3]:
+				xmin = 2.15
+				xmax = 3.39
+				text = "sp"
+			intervals [4]:
+				xmin = 3.39
+				xmax = 4.75
+				text = "responsible"
+			intervals [5]:
+				xmin = 4.75
+				xmax = 5.3
+				text = "sp"
+			intervals [6]:
+				xmin = 5.3
+				xmax = 5.55
+				text = "sensitive"
+			intervals [7]:
+				xmin = 5.55
+				xmax = 12.12
+				text = "sil"

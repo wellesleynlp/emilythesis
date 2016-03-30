@@ -1,0 +1,168 @@
+File type = "ooTextFile"
+Object class = "TextGrid"
+
+xmin = 0.0
+xmax = 15.52
+tiers? <exists>
+size = 2
+item []:
+	item [1]:
+		class = "IntervalTier"
+		name = "phone"
+		xmin = 0.0
+		xmax = 15.52
+		intervals: size = 28
+			intervals [1]:
+				xmin = 0.0
+				xmax = 2.03
+				text = "sil"
+			intervals [2]:
+				xmin = 2.03
+				xmax = 2.23
+				text = "AY1"
+			intervals [3]:
+				xmin = 2.23
+				xmax = 2.39
+				text = "AH2"
+			intervals [4]:
+				xmin = 2.39
+				xmax = 2.51
+				text = "N"
+			intervals [5]:
+				xmin = 2.51
+				xmax = 2.56
+				text = "D"
+			intervals [6]:
+				xmin = 2.56
+				xmax = 2.62
+				text = "ER0"
+			intervals [7]:
+				xmin = 2.62
+				xmax = 2.76
+				text = "S"
+			intervals [8]:
+				xmin = 2.76
+				xmax = 2.81
+				text = "T"
+			intervals [9]:
+				xmin = 2.81
+				xmax = 3.06
+				text = "AE1"
+			intervals [10]:
+				xmin = 3.06
+				xmax = 3.19
+				text = "N"
+			intervals [11]:
+				xmin = 3.19
+				xmax = 3.31
+				text = "D"
+			intervals [12]:
+				xmin = 3.31
+				xmax = 3.84
+				text = ""
+			intervals [13]:
+				xmin = 3.84
+				xmax = 3.96
+				text = "OW1"
+			intervals [14]:
+				xmin = 3.96
+				xmax = 3.99
+				text = "N"
+			intervals [15]:
+				xmin = 3.99
+				xmax = 4.03
+				text = "L"
+			intervals [16]:
+				xmin = 4.03
+				xmax = 4.06
+				text = "IY0"
+			intervals [17]:
+				xmin = 4.06
+				xmax = 4.09
+				text = "EY1"
+			intervals [18]:
+				xmin = 4.09
+				xmax = 4.12
+				text = "L"
+			intervals [19]:
+				xmin = 4.12
+				xmax = 4.18
+				text = "IH1"
+			intervals [20]:
+				xmin = 4.18
+				xmax = 4.23
+				text = "T"
+			intervals [21]:
+				xmin = 4.23
+				xmax = 4.32
+				text = "AH0"
+			intervals [22]:
+				xmin = 4.32
+				xmax = 4.42
+				text = "L"
+			intervals [23]:
+				xmin = 4.42
+				xmax = 4.51
+				text = "IH1"
+			intervals [24]:
+				xmin = 4.51
+				xmax = 4.6
+				text = "NG"
+			intervals [25]:
+				xmin = 4.6
+				xmax = 4.78
+				text = "L"
+			intervals [26]:
+				xmin = 4.78
+				xmax = 4.81
+				text = "IH0"
+			intervals [27]:
+				xmin = 4.81
+				xmax = 4.84
+				text = "SH"
+			intervals [28]:
+				xmin = 4.84
+				xmax = 15.52
+				text = "sil"
+	item [2]:
+		class = "IntervalTier"
+		name = "word"
+		xmin = 0.0
+		xmax = 15.52
+		intervals: size = 9
+			intervals [1]:
+				xmin = 0.0
+				xmax = 2.03
+				text = "sil"
+			intervals [2]:
+				xmin = 2.03
+				xmax = 2.23
+				text = "i"
+			intervals [3]:
+				xmin = 2.23
+				xmax = 3.31
+				text = "understand"
+			intervals [4]:
+				xmin = 3.31
+				xmax = 3.84
+				text = "sp"
+			intervals [5]:
+				xmin = 3.84
+				xmax = 4.06
+				text = "only"
+			intervals [6]:
+				xmin = 4.06
+				xmax = 4.09
+				text = "a"
+			intervals [7]:
+				xmin = 4.09
+				xmax = 4.42
+				text = "little"
+			intervals [8]:
+				xmin = 4.42
+				xmax = 4.84
+				text = "english"
+			intervals [9]:
+				xmin = 4.84
+				xmax = 15.52
+				text = "sil"
