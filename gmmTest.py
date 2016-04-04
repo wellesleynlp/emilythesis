@@ -14,7 +14,8 @@ if __name__=='__main__':
     
     #load models
     models = {}
-    langlist = ['MA', 'KO', 'IN', 'AR', 'HI', 'CZ', 'FR']
+    # langlist = ['MA', 'KO', 'IN', 'AR', 'HI', 'CZ', 'FR']
+    langlist = sys.argv[5:]
     for lang in langlist:
         if os.path.exists(os.path.join(modeldir, lang, 
                                        covar+'-'+n_components+'-'+lang+'.weights')):
