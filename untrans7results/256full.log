@@ -1,0 +1,18 @@
+Running Python2.7 (/opt/bin/python2.7) with the Tkinter library
+/opt/bin/python2.7 gmmTest.py /home/sravana/data/cslu_fae_corpus/npz /home/sravana/data/cslu_fae_corpus/models 256 full AR CZ IN KO HI MA FR
+Loaded compressed data for AR
+Loaded compressed data for CZ
+Loaded compressed data for IN
+Loaded compressed data for KO
+Loaded compressed data for HI
+Loaded compressed data for MA
+Loaded compressed data for FR
+Testing 71 files from FR
+37 correct
+Testing 70 files from MA
+36 correct
+Testing 43 files from KO
+8 correct
+Testing 25 files from CZ
+0 correct
+Testing 28 files from AR

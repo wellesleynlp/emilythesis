@@ -1,0 +1,29 @@
+Running Python2.7 (/opt/bin/python2.7) with the Tkinter library
+/opt/bin/python2.7 gmmTest.py /home/sravana/data/cslu_fae_corpus/npz /home/sravana/data/cslu_fae_corpus/models 128 full KO IN MA
+Loaded compressed data for KO
+Loaded compressed data for IN
+Loaded compressed data for MA
+Testing 70 files from MA
+53 correct
+Testing 43 files from KO
+16 correct
+Testing 24 files from IN
+3 correct
+
+Accuracy 52.5547445255
+********************
+MA confusion:
+MA: 75.71%
+KO: 21.43%
+IN: 2.86%
+********************
+KO confusion:
+MA: 62.79%
+KO: 37.21%
+IN: 0.00%
+********************
+IN confusion:
+MA: 54.17%
+KO: 33.33%
+IN: 12.50%
+********************
