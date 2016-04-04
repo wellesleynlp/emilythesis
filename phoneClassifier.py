@@ -104,8 +104,8 @@ def run_test(models, data):
             #print actual_lang, "LOGPROBS:", logprobs
             
             # insert prediction (of lang index) into predicted list                                     
-            predicted_labels.append(predicted_lang)
-            actual_labels.append(actual_lang)
+            predicted_labels.append(langlist.index(predicted_lang))
+            actual_labels.append(ai)
             
             if actual_lang == predicted_lang:
                 num_correct += 1
@@ -118,8 +118,8 @@ def run_test(models, data):
         print 'RESULTS FOR', actual_lang, lang_correct, 'out of', lang_total, ':\t', lang_correct*100/lang_total
 
     #CONFUSION MATRIX (y_test, y_pred) -> (actual label, predictions)     
-    print 'ACTUAL LABELS', len(actual_labels), actual_labels
-    print 'PREDICTED LABELS', len(predicted_labels), predicted_labels
+    #print 'ACTUAL LABELS', len(actual_labels), actual_labels
+    #print 'PREDICTED LABELS', len(predicted_labels), predicted_labels
     cm = confusion_matrix(actual_labels, predicted_labels)
     cm_normalized = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
     # display confusion stats by lang (TODO: visualize with matplotlib)                                 
