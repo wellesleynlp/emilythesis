@@ -13,7 +13,7 @@ import numpy as np
 from sklearn.mixture import GMM
 import os
 import sys
-#from sklearn.metrics import confusion_matrix
+from sklearn.metrics import confusion_matrix
 import time
 from collections import defaultdict
 
@@ -42,14 +42,14 @@ def load_data(phonedir, langlist):
         for filename in os.listdir(os.path.join(phonedir, lang)):
             phone = os.path.splitext(filename)[0][8:] # only grab phone
             file_noext = os.path.splitext(filename)[0][:8] # only grab filename
-            # if not phone=='sil' and not phone=='': # ignore TextGrid phones 'sil' and ''
+            if not phone=='sil' and not phone=='': # ignore TextGrid phones 'sil' and ''
             # remove stress distinction for vowels. Ex. 'AA1' -> 'AA'
-            if len(phone)==3:
-                phone = phone[:2]
-            if not phone in data[lang]:
-                data[lang][phone] = {}
-            #data[lang][phone][file_noext] = np.load(os.path.join(phonedir, lang, filename))
-            data[lang][phone][file_noext] = list(np.load(os.path.join(phonedir, lang, filename)))
+                if len(phone)==3:
+                    phone = phone[:2]
+                if not phone in data[lang]:
+                    data[lang][phone] = {}
+                #data[lang][phone][file_noext] = np.load(os.path.join(phonedir, lang, filename))
+                data[lang][phone][file_noext] = list(np.load(os.path.join(phonedir, lang, filename)))
 
         print 'Loaded compressed data for', lang, time.time() - langstart
     return data
@@ -69,10 +69,14 @@ def run_test(models, data):
     actual_labels = []
     langlist = models.keys()
     for ai, actual_lang in enumerate(langlist):
+        print '*'*20
+        print 'TESTING', actual_lang
         lang_correct = 0.0
         lang_total = 0.0
         test_files = open(os.path.join('traintestsplit', actual_lang+'.testlist')).read().split()
+        phone_guesses = defaultdict(dict) # [phone][test_lang] = total logprobs across all files for 1 lang
         for filename in test_files:
+            #print 'PREDICIONS FOR', filename
             predictions = defaultdict(int)
             logprobs = defaultdict(dict)   # dict: total log prob of this file under each model                    
             for test_lang in langlist:
@@ -85,26 +89,37 @@ def run_test(models, data):
                             logprobs[phone][test_lang] = apply_model(models[test_lang][phone], data[actual_lang][phone][filename])
                             
             for phone in logprobs:
+                if not phone in phone_guesses:
+                        phone_guesses[phone] = defaultdict(int)
                 for test_lang in langlist:
                     if test_lang in logprobs[phone]: # check if this phone exists in this lang's training data
                         predictions[test_lang] += logprobs[phone][test_lang]
+                        
+                        phone_guesses[phone][test_lang] += logprobs[phone][test_lang]
+                #pred_lang_phone = max(logprobs[phone].items(), key=lambda x:x[1])[0]
+                #print 'PHONE', phone, 'GUESS', pred_lang_phone
             
             predicted_lang = max(predictions.items(), key=lambda x:x[1])[0]
-            print 'PREDICIONS FOR', filename, predicted_lang
+            #print 'OVERALL', predicted_lang
             #print actual_lang, "LOGPROBS:", logprobs
             
             # insert prediction (of lang index) into predicted list                                     
-
+            predicted_labels.append(predicted_lang)
+            actual_labels.append(actual_lang)
+            
             if actual_lang == predicted_lang:
                 num_correct += 1
                 lang_correct += 1
             num_total += 1
             lang_total += 1
-        print 'results for', actual_lang, lang_correct*100/lang_total
+        for phone in phone_guesses:
+            pred_lang_phone = max(phone_guesses[phone].items(), key=lambda x:x[1])[0]
+            print 'phone\t', phone, '\tguess\t', pred_lang_phone
+        print 'RESULTS FOR', actual_lang, lang_correct, 'out of', lang_total, ':\t', lang_correct*100/lang_total
 
-    print 'Accuracy', num_correct*100/num_total
-
-''' #CONFUSION MATRIX (y_test, y_pred) -> (actual label, predictions)                                   
+    #CONFUSION MATRIX (y_test, y_pred) -> (actual label, predictions)     
+    print 'ACTUAL LABELS', len(actual_labels), actual_labels
+    print 'PREDICTED LABELS', len(predicted_labels), predicted_labels
     cm = confusion_matrix(actual_labels, predicted_labels)
     cm_normalized = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
     # display confusion stats by lang (TODO: visualize with matplotlib)                                 
@@ -113,7 +128,8 @@ def run_test(models, data):
         print actual_lang, 'confusion:'
         for pi, predicted_lang in enumerate(langlist):
             print '{0}: {1:.2f}%'.format(predicted_lang, cm_normalized[ai, pi]*100)
-        print '*'*20'''
+        print '*'*20
+    print 'OVERALL ACCURACY', num_correct*100/num_total
 
 if __name__=='__main__':
     """load .npy data, split into train-test folds, run training and testing"""
@@ -128,7 +144,7 @@ if __name__=='__main__':
     langlist = sys.argv[4:]
 
     start = time.time()
-    print "START"
+    print "START 2"
     
     data = load_data(phonedir, langlist) #format: data[lang][phone] = [ [plp1][plp2][plp3]...]
     #print "DATA AR phones AA2", data['AR']['AA2'].keys()
