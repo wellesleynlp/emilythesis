@@ -6,7 +6,7 @@ import numpy as np
 __author__='Emily Ahn and Sravana Reddy'
 
 """ Date created: 3/10/2016
-	Date modified: 3/27/2016
+	Date modified: 4/4/2016
 	*******************************************************************************************
 	Given forced alignments (transcriptions) of all speech files in 1 lang, create .npytxt files
 	sorted by filename and phoneme, where each file contains plp features of only that phoneme.
@@ -20,7 +20,8 @@ def create_phone_dict(file_data, tg):
 
 	for intv in tg.tiers[0].intervals:
 		# do not include '' and 'sil' intervals
-		if (not intv.mark=='') and (not intv.mark=='sil'):
+		#if (not intv.mark=='') and (not intv.mark=='sil'):
+		if (intv.mark=='') or (intv.mark=='sil'): # generate '' and 'sil' for MA, HI, KO
 			plp_starti = int(intv.minTime*100)
 			plp_endi = int(intv.maxTime*100)
 			plp_ft = [] #2-D array

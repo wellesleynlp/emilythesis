@@ -42,14 +42,14 @@ def load_data(phonedir, langlist):
         for filename in os.listdir(os.path.join(phonedir, lang)):
             phone = os.path.splitext(filename)[0][8:] # only grab phone
             file_noext = os.path.splitext(filename)[0][:8] # only grab filename
-            if not phone=='sil' and not phone=='': # ignore TextGrid phones 'sil' and ''
+            #if not phone=='sil' and not phone=='': # ignore TextGrid phones 'sil' and ''
             # remove stress distinction for vowels. Ex. 'AA1' -> 'AA'
-                if len(phone)==3:
-                    phone = phone[:2]
-                if not phone in data[lang]:
-                    data[lang][phone] = {}
-                #data[lang][phone][file_noext] = np.load(os.path.join(phonedir, lang, filename))
-                data[lang][phone][file_noext] = list(np.load(os.path.join(phonedir, lang, filename)))
+            if len(phone)==3:
+                phone = phone[:2]
+            if not phone in data[lang]:
+                data[lang][phone] = {}
+            #data[lang][phone][file_noext] = np.load(os.path.join(phonedir, lang, filename))
+            data[lang][phone][file_noext] = list(np.load(os.path.join(phonedir, lang, filename)))
 
         print 'Loaded compressed data for', lang, time.time() - langstart
     return data
