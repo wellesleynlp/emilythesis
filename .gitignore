@@ -3,4 +3,4 @@
 *.pyc
 *.wav
 .DS_Store
-models/**
+/models/*
