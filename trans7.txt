@@ -1,0 +1,382 @@
+Running Python2.7 (/opt/bin/python2.7) with the Tkinter library
+/opt/bin/python2.7 phoneClassifier.py /home/sravana/data/cslu_fae_corpus/phones 2 full FR CZ AR IN HI MA KO
+START 2
+Loaded compressed data for FR 6.42974805832
+Loaded compressed data for CZ 2.34255194664
+Loaded compressed data for AR 2.44915390015
+Loaded compressed data for IN 2.18888878822
+Loaded compressed data for HI 8.07800388336
+Loaded compressed data for MA 6.36329984665
+Loaded compressed data for KO 3.74264907837
+BEGIN TRAINING FR
+Trained model for FR 174.362998962
+BEGIN TRAINING CZ
+Trained model for CZ 230.957201004
+BEGIN TRAINING AR
+Trained model for AR 288.987836123
+BEGIN TRAINING IN
+Trained model for IN 336.333323002
+BEGIN TRAINING HI
+Trained model for HI 516.498216152
+BEGIN TRAINING MA
+Trained model for MA 641.956596136
+BEGIN TRAINING KO
+Trained model for KO 716.904335022
+********************
+TESTING FR
+phone	IY 	guess	FR
+phone	W 	guess	FR
+phone	DH 	guess	FR
+phone	Y 	guess	FR
+phone	HH 	guess	FR
+phone	B 	guess	FR
+phone	JH 	guess	FR
+phone	ZH 	guess	IN
+phone	D 	guess	FR
+phone	NG 	guess	FR
+phone	TH 	guess	FR
+phone	AA 	guess	FR
+phone	CH 	guess	FR
+phone	AE 	guess	MA
+phone	EH 	guess	FR
+phone	G 	guess	HI
+phone	F 	guess	FR
+phone	AH 	guess	FR
+phone	K 	guess	FR
+phone	M 	guess	FR
+phone	L 	guess	MA
+phone	AO 	guess	HI
+phone	N 	guess	FR
+phone	P 	guess	HI
+phone	S 	guess	FR
+phone	R 	guess	FR
+phone	EY 	guess	FR
+phone	T 	guess	FR
+phone	AW 	guess	MA
+phone	V 	guess	FR
+phone	AY 	guess	MA
+phone	Z 	guess	FR
+phone	ER 	guess	FR
+phone	IH 	guess	HI
+phone	UW 	guess	FR
+phone	SH 	guess	FR
+phone	UH 	guess	HI
+phone	OY 	guess	HI
+phone	OW 	guess	FR
+RESULTS FOR FR 35.0 out of 71.0 :	49.2957746479
+********************
+TESTING MA
+phone	IY 	guess	MA
+phone	AW 	guess	MA
+phone	DH 	guess	MA
+phone	AY 	guess	MA
+phone	HH 	guess	MA
+phone	B 	guess	MA
+phone	JH 	guess	MA
+phone	ZH 	guess	IN
+phone	D 	guess	MA
+phone	NG 	guess	MA
+phone	TH 	guess	FR
+phone	AA 	guess	MA
+phone	CH 	guess	MA
+phone	AE 	guess	MA
+phone	EH 	guess	MA
+phone	G 	guess	MA
+phone	F 	guess	FR
+phone	AH 	guess	MA
+phone	K 	guess	MA
+phone	M 	guess	MA
+phone	L 	guess	KO
+phone	AO 	guess	MA
+phone	N 	guess	MA
+phone	P 	guess	MA
+phone	S 	guess	MA
+phone	R 	guess	MA
+phone	EY 	guess	MA
+phone	T 	guess	MA
+phone	W 	guess	MA
+phone	V 	guess	HI
+phone	Y 	guess	MA
+phone	Z 	guess	FR
+phone	ER 	guess	MA
+phone	IH 	guess	MA
+phone	UW 	guess	MA
+phone	SH 	guess	HI
+phone	UH 	guess	HI
+phone	OY 	guess	HI
+phone	OW 	guess	KO
+RESULTS FOR MA 43.0 out of 70.0 :	61.4285714286
+********************
+TESTING KO
+phone	IY 	guess	MA
+phone	W 	guess	MA
+phone	DH 	guess	FR
+phone	Y 	guess	MA
+phone	HH 	guess	HI
+phone	CH 	guess	MA
+phone	JH 	guess	MA
+phone	ZH 	guess	IN
+phone	D 	guess	MA
+phone	NG 	guess	MA
+phone	TH 	guess	FR
+phone	AA 	guess	FR
+phone	B 	guess	MA
+phone	AE 	guess	HI
+phone	EH 	guess	MA
+phone	G 	guess	MA
+phone	F 	guess	FR
+phone	AH 	guess	MA
+phone	K 	guess	KO
+phone	M 	guess	KO
+phone	L 	guess	KO
+phone	AO 	guess	MA
+phone	N 	guess	KO
+phone	IH 	guess	KO
+phone	S 	guess	MA
+phone	R 	guess	KO
+phone	EY 	guess	MA
+phone	T 	guess	MA
+phone	AW 	guess	MA
+phone	V 	guess	HI
+phone	AY 	guess	MA
+phone	Z 	guess	FR
+phone	ER 	guess	FR
+phone	P 	guess	MA
+phone	UW 	guess	FR
+phone	SH 	guess	HI
+phone	UH 	guess	FR
+phone	OY 	guess	HI
+phone	OW 	guess	KO
+RESULTS FOR KO 14.0 out of 43.0 :	32.5581395349
+********************
+TESTING CZ
+phone	IY 	guess	KO
+phone	W 	guess	HI
+phone	DH 	guess	HI
+phone	Y 	guess	HI
+phone	HH 	guess	HI
+phone	CH 	guess	FR
+phone	JH 	guess	HI
+phone	D 	guess	FR
+phone	NG 	guess	HI
+phone	TH 	guess	FR
+phone	AA 	guess	FR
+phone	B 	guess	HI
+phone	AE 	guess	HI
+phone	EH 	guess	MA
+phone	G 	guess	HI
+phone	F 	guess	FR
+phone	AH 	guess	KO
+phone	K 	guess	HI
+phone	M 	guess	HI
+phone	L 	guess	CZ
+phone	AO 	guess	HI
+phone	N 	guess	HI
+phone	P 	guess	HI
+phone	S 	guess	CZ
+phone	R 	guess	MA
+phone	EY 	guess	HI
+phone	T 	guess	CZ
+phone	AW 	guess	HI
+phone	V 	guess	HI
+phone	AY 	guess	KO
+phone	Z 	guess	HI
+phone	ER 	guess	FR
+phone	IH 	guess	HI
+phone	UW 	guess	MA
+phone	SH 	guess	HI
+phone	UH 	guess	FR
+phone	OY 	guess	HI
+phone	OW 	guess	MA
+RESULTS FOR CZ 2.0 out of 25.0 :	8.0
+********************
+TESTING AR
+phone	AA 	guess	KO
+phone	W 	guess	AR
+phone	DH 	guess	HI
+phone	Y 	guess	MA
+phone	HH 	guess	HI
+phone	CH 	guess	FR
+phone	JH 	guess	HI
+phone	ZH 	guess	HI
+phone	D 	guess	FR
+phone	NG 	guess	FR
+phone	TH 	guess	FR
+phone	IY 	guess	KO
+phone	B 	guess	HI
+phone	AE 	guess	HI
+phone	EH 	guess	HI
+phone	G 	guess	FR
+phone	F 	guess	FR
+phone	AH 	guess	AR
+phone	K 	guess	HI
+phone	M 	guess	HI
+phone	L 	guess	MA
+phone	AO 	guess	KO
+phone	N 	guess	AR
+phone	P 	guess	HI
+phone	S 	guess	HI
+phone	R 	guess	HI
+phone	EY 	guess	HI
+phone	T 	guess	FR
+phone	AW 	guess	HI
+phone	V 	guess	HI
+phone	AY 	guess	AR
+phone	Z 	guess	HI
+phone	ER 	guess	HI
+phone	IH 	guess	HI
+phone	UW 	guess	HI
+phone	SH 	guess	HI
+phone	UH 	guess	HI
+phone	OY 	guess	FR
+phone	OW 	guess	HI
+RESULTS FOR AR 5.0 out of 28.0 :	17.8571428571
+********************
+TESTING HI
+phone	IY 	guess	HI
+phone	AW 	guess	HI
+phone	DH 	guess	HI
+phone	Y 	guess	HI
+phone	HH 	guess	HI
+phone	B 	guess	HI
+phone	JH 	guess	HI
+phone	ZH 	guess	IN
+phone	D 	guess	HI
+phone	NG 	guess	HI
+phone	TH 	guess	HI
+phone	AA 	guess	HI
+phone	CH 	guess	HI
+phone	AE 	guess	HI
+phone	EH 	guess	HI
+phone	G 	guess	HI
+phone	F 	guess	HI
+phone	AH 	guess	HI
+phone	K 	guess	HI
+phone	M 	guess	HI
+phone	L 	guess	HI
+phone	AO 	guess	HI
+phone	N 	guess	HI
+phone	P 	guess	HI
+phone	S 	guess	HI
+phone	R 	guess	HI
+phone	EY 	guess	HI
+phone	T 	guess	HI
+phone	W 	guess	HI
+phone	V 	guess	HI
+phone	AY 	guess	KO
+phone	Z 	guess	HI
+phone	ER 	guess	HI
+phone	IH 	guess	HI
+phone	UW 	guess	HI
+phone	SH 	guess	HI
+phone	UH 	guess	HI
+phone	OY 	guess	HI
+phone	OW 	guess	HI
+RESULTS FOR HI 52.0 out of 87.0 :	59.7701149425
+********************
+TESTING IN
+phone	IY 	guess	MA
+phone	W 	guess	KO
+phone	DH 	guess	FR
+phone	Y 	guess	MA
+phone	HH 	guess	KO
+phone	B 	guess	HI
+phone	JH 	guess	HI
+phone	ZH 	guess	IN
+phone	D 	guess	MA
+phone	NG 	guess	HI
+phone	TH 	guess	FR
+phone	AA 	guess	FR
+phone	CH 	guess	HI
+phone	AE 	guess	HI
+phone	EH 	guess	MA
+phone	G 	guess	FR
+phone	F 	guess	FR
+phone	AH 	guess	IN
+phone	K 	guess	KO
+phone	M 	guess	MA
+phone	L 	guess	KO
+phone	AO 	guess	FR
+phone	N 	guess	IN
+phone	P 	guess	HI
+phone	S 	guess	MA
+phone	R 	guess	MA
+phone	EY 	guess	MA
+phone	T 	guess	IN
+phone	AW 	guess	HI
+phone	V 	guess	FR
+phone	AY 	guess	MA
+phone	Z 	guess	MA
+phone	ER 	guess	FR
+phone	IH 	guess	HI
+phone	UW 	guess	MA
+phone	SH 	guess	HI
+phone	UH 	guess	FR
+phone	OY 	guess	HI
+phone	OW 	guess	FR
+RESULTS FOR IN 4.0 out of 24.0 :	16.6666666667
+********************
+FR confusion:
+FR: 49.30%
+MA: 22.54%
+KO: 9.86%
+CZ: 0.00%
+AR: 11.27%
+HI: 7.04%
+IN: 0.00%
+********************
+MA confusion:
+FR: 8.57%
+MA: 61.43%
+KO: 14.29%
+CZ: 0.00%
+AR: 5.71%
+HI: 8.57%
+IN: 1.43%
+********************
+KO confusion:
+FR: 9.30%
+MA: 37.21%
+KO: 32.56%
+CZ: 2.33%
+AR: 11.63%
+HI: 6.98%
+IN: 0.00%
+********************
+CZ confusion:
+FR: 28.00%
+MA: 16.00%
+KO: 4.00%
+CZ: 8.00%
+AR: 12.00%
+HI: 32.00%
+IN: 0.00%
+********************
+AR confusion:
+FR: 14.29%
+MA: 17.86%
+KO: 0.00%
+CZ: 0.00%
+AR: 17.86%
+HI: 46.43%
+IN: 3.57%
+********************
+HI confusion:
+FR: 6.90%
+MA: 19.54%
+KO: 5.75%
+CZ: 2.30%
+AR: 4.60%
+HI: 59.77%
+IN: 1.15%
+********************
+IN confusion:
+FR: 12.50%
+MA: 37.50%
+KO: 8.33%
+CZ: 0.00%
+AR: 4.17%
+HI: 20.83%
+IN: 16.67%
+********************
+OVERALL ACCURACY 44.5402298851

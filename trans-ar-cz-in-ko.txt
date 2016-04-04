@@ -1,0 +1,208 @@
+Running Python2.7 (/opt/bin/python2.7) with the Tkinter library
+/opt/bin/python2.7 phoneClassifier.py /home/sravana/data/cslu_fae_corpus/phones 2 full CZ IN AR KO
+START 2
+Loaded compressed data for CZ 2.53607106209
+Loaded compressed data for IN 2.53875303268
+Loaded compressed data for AR 2.65433979034
+Loaded compressed data for KO 3.83961105347
+BEGIN TRAINING CZ
+Trained model for CZ 74.3566451073
+BEGIN TRAINING IN
+Trained model for IN 128.19581604
+BEGIN TRAINING AR
+Trained model for AR 192.881102085
+BEGIN TRAINING KO
+Trained model for KO 272.352613211
+********************
+TESTING CZ
+phone	IY 	guess	KO
+phone	AW 	guess	KO
+phone	DH 	guess	AR
+phone	Y 	guess	CZ
+phone	HH 	guess	KO
+phone	CH 	guess	CZ
+phone	JH 	guess	KO
+phone	D 	guess	CZ
+phone	NG 	guess	KO
+phone	TH 	guess	KO
+phone	AA 	guess	CZ
+phone	B 	guess	AR
+phone	AE 	guess	KO
+phone	EH 	guess	AR
+phone	G 	guess	KO
+phone	F 	guess	CZ
+phone	AH 	guess	KO
+phone	K 	guess	CZ
+phone	M 	guess	IN
+phone	L 	guess	CZ
+phone	AO 	guess	KO
+phone	N 	guess	AR
+phone	P 	guess	AR
+phone	S 	guess	CZ
+phone	R 	guess	KO
+phone	EY 	guess	CZ
+phone	T 	guess	CZ
+phone	W 	guess	CZ
+phone	V 	guess	CZ
+phone	AY 	guess	KO
+phone	Z 	guess	KO
+phone	ER 	guess	KO
+phone	IH 	guess	AR
+phone	UW 	guess	KO
+phone	SH 	guess	AR
+phone	UH 	guess	AR
+phone	OY 	guess	KO
+phone	OW 	guess	KO
+RESULTS FOR CZ 8.0 out of 25.0 :	32.0
+********************
+TESTING AR
+phone	AA 	guess	KO
+phone	AW 	guess	AR
+phone	DH 	guess	AR
+phone	Y 	guess	KO
+phone	HH 	guess	KO
+phone	CH 	guess	CZ
+phone	JH 	guess	AR
+phone	ZH 	guess	IN
+phone	D 	guess	AR
+phone	NG 	guess	CZ
+phone	TH 	guess	KO
+phone	IY 	guess	KO
+phone	B 	guess	AR
+phone	AE 	guess	KO
+phone	EH 	guess	AR
+phone	G 	guess	KO
+phone	F 	guess	AR
+phone	AH 	guess	AR
+phone	K 	guess	AR
+phone	M 	guess	IN
+phone	L 	guess	CZ
+phone	AO 	guess	KO
+phone	N 	guess	AR
+phone	P 	guess	CZ
+phone	S 	guess	AR
+phone	R 	guess	AR
+phone	EY 	guess	AR
+phone	T 	guess	AR
+phone	W 	guess	AR
+phone	V 	guess	AR
+phone	AY 	guess	AR
+phone	Z 	guess	AR
+phone	ER 	guess	AR
+phone	IH 	guess	AR
+phone	UW 	guess	AR
+phone	SH 	guess	CZ
+phone	UH 	guess	AR
+phone	OY 	guess	KO
+phone	OW 	guess	KO
+RESULTS FOR AR 13.0 out of 28.0 :	46.4285714286
+********************
+TESTING KO
+phone	IY 	guess	KO
+phone	AW 	guess	KO
+phone	DH 	guess	KO
+phone	Y 	guess	KO
+phone	HH 	guess	KO
+phone	CH 	guess	CZ
+phone	JH 	guess	KO
+phone	ZH 	guess	IN
+phone	D 	guess	KO
+phone	NG 	guess	KO
+phone	TH 	guess	KO
+phone	AA 	guess	KO
+phone	B 	guess	KO
+phone	AE 	guess	KO
+phone	EH 	guess	KO
+phone	G 	guess	KO
+phone	F 	guess	KO
+phone	AH 	guess	CZ
+phone	K 	guess	KO
+phone	M 	guess	KO
+phone	L 	guess	KO
+phone	AO 	guess	KO
+phone	N 	guess	KO
+phone	IH 	guess	KO
+phone	S 	guess	IN
+phone	R 	guess	KO
+phone	EY 	guess	KO
+phone	T 	guess	KO
+phone	W 	guess	KO
+phone	V 	guess	KO
+phone	AY 	guess	KO
+phone	Z 	guess	KO
+phone	ER 	guess	KO
+phone	P 	guess	KO
+phone	UW 	guess	AR
+phone	SH 	guess	KO
+phone	UH 	guess	CZ
+phone	OY 	guess	CZ
+phone	OW 	guess	KO
+RESULTS FOR KO 30.0 out of 43.0 :	69.7674418605
+********************
+TESTING IN
+phone	IY 	guess	KO
+phone	AW 	guess	KO
+phone	DH 	guess	CZ
+phone	Y 	guess	KO
+phone	HH 	guess	KO
+phone	CH 	guess	CZ
+phone	JH 	guess	KO
+phone	ZH 	guess	IN
+phone	D 	guess	IN
+phone	NG 	guess	IN
+phone	TH 	guess	KO
+phone	AA 	guess	CZ
+phone	B 	guess	AR
+phone	AE 	guess	KO
+phone	EH 	guess	KO
+phone	G 	guess	KO
+phone	F 	guess	KO
+phone	AH 	guess	IN
+phone	K 	guess	KO
+phone	M 	guess	IN
+phone	L 	guess	KO
+phone	AO 	guess	KO
+phone	N 	guess	IN
+phone	P 	guess	KO
+phone	S 	guess	IN
+phone	R 	guess	KO
+phone	EY 	guess	KO
+phone	T 	guess	IN
+phone	W 	guess	KO
+phone	V 	guess	IN
+phone	AY 	guess	KO
+phone	Z 	guess	KO
+phone	ER 	guess	KO
+phone	IH 	guess	IN
+phone	UW 	guess	KO
+phone	SH 	guess	CZ
+phone	UH 	guess	AR
+phone	OY 	guess	CZ
+phone	OW 	guess	KO
+RESULTS FOR IN 9.0 out of 24.0 :	37.5
+********************
+CZ confusion:
+CZ: 32.00%
+AR: 44.00%
+KO: 24.00%
+IN: 0.00%
+********************
+AR confusion:
+CZ: 7.14%
+AR: 46.43%
+KO: 46.43%
+IN: 0.00%
+********************
+KO confusion:
+CZ: 16.28%
+AR: 13.95%
+KO: 69.77%
+IN: 0.00%
+********************
+IN confusion:
+CZ: 0.00%
+AR: 16.67%
+KO: 45.83%
+IN: 37.50%
+********************
+OVERALL ACCURACY 50.0

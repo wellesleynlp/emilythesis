@@ -1,0 +1,154 @@
+Running Python2.7 (/opt/bin/python2.7) with the Tkinter library
+/opt/bin/python2.7 phoneClassifier.py /home/sravana/data/cslu_fae_corpus/phones 2 full CZ IN AR
+START 2
+Loaded compressed data for CZ 2.29282188416
+Loaded compressed data for IN 2.09106492996
+Loaded compressed data for AR 2.39766287804
+BEGIN TRAINING CZ
+Trained model for CZ 60.9749200344
+BEGIN TRAINING IN
+Trained model for IN 113.983808994
+BEGIN TRAINING AR
+Trained model for AR 169.586926937
+********************
+TESTING CZ
+phone	IY 	guess	AR
+phone	AW 	guess	CZ
+phone	DH 	guess	AR
+phone	Y 	guess	CZ
+phone	HH 	guess	IN
+phone	CH 	guess	CZ
+phone	JH 	guess	CZ
+phone	D 	guess	CZ
+phone	NG 	guess	CZ
+phone	TH 	guess	CZ
+phone	AA 	guess	CZ
+phone	B 	guess	AR
+phone	AE 	guess	CZ
+phone	EH 	guess	AR
+phone	G 	guess	CZ
+phone	F 	guess	CZ
+phone	AH 	guess	IN
+phone	K 	guess	CZ
+phone	M 	guess	IN
+phone	L 	guess	CZ
+phone	AO 	guess	CZ
+phone	N 	guess	AR
+phone	P 	guess	AR
+phone	S 	guess	CZ
+phone	R 	guess	CZ
+phone	EY 	guess	CZ
+phone	T 	guess	CZ
+phone	W 	guess	CZ
+phone	V 	guess	CZ
+phone	AY 	guess	CZ
+phone	Z 	guess	CZ
+phone	ER 	guess	IN
+phone	IH 	guess	AR
+phone	UW 	guess	AR
+phone	SH 	guess	AR
+phone	UH 	guess	AR
+phone	OY 	guess	CZ
+phone	OW 	guess	AR
+RESULTS FOR CZ 12.0 out of 25.0 :	48.0
+********************
+TESTING AR
+phone	AA 	guess	CZ
+phone	AW 	guess	AR
+phone	DH 	guess	AR
+phone	Y 	guess	IN
+phone	HH 	guess	IN
+phone	CH 	guess	CZ
+phone	JH 	guess	AR
+phone	ZH 	guess	IN
+phone	D 	guess	AR
+phone	NG 	guess	CZ
+phone	TH 	guess	CZ
+phone	IY 	guess	CZ
+phone	B 	guess	AR
+phone	AE 	guess	CZ
+phone	EH 	guess	AR
+phone	G 	guess	AR
+phone	F 	guess	AR
+phone	AH 	guess	AR
+phone	K 	guess	AR
+phone	M 	guess	IN
+phone	L 	guess	CZ
+phone	AO 	guess	CZ
+phone	N 	guess	AR
+phone	P 	guess	CZ
+phone	S 	guess	AR
+phone	R 	guess	AR
+phone	EY 	guess	AR
+phone	T 	guess	AR
+phone	W 	guess	AR
+phone	V 	guess	AR
+phone	AY 	guess	AR
+phone	Z 	guess	AR
+phone	ER 	guess	AR
+phone	IH 	guess	AR
+phone	UW 	guess	AR
+phone	SH 	guess	CZ
+phone	UH 	guess	AR
+phone	OY 	guess	CZ
+phone	OW 	guess	AR
+RESULTS FOR AR 15.0 out of 28.0 :	53.5714285714
+********************
+TESTING IN
+phone	IY 	guess	IN
+phone	AW 	guess	CZ
+phone	DH 	guess	CZ
+phone	Y 	guess	CZ
+phone	HH 	guess	IN
+phone	CH 	guess	CZ
+phone	JH 	guess	IN
+phone	ZH 	guess	IN
+phone	D 	guess	IN
+phone	NG 	guess	IN
+phone	TH 	guess	CZ
+phone	AA 	guess	CZ
+phone	B 	guess	AR
+phone	AE 	guess	CZ
+phone	EH 	guess	CZ
+phone	G 	guess	IN
+phone	F 	guess	CZ
+phone	AH 	guess	IN
+phone	K 	guess	CZ
+phone	M 	guess	IN
+phone	L 	guess	IN
+phone	AO 	guess	IN
+phone	N 	guess	IN
+phone	P 	guess	CZ
+phone	S 	guess	IN
+phone	R 	guess	IN
+phone	EY 	guess	CZ
+phone	T 	guess	IN
+phone	W 	guess	CZ
+phone	V 	guess	IN
+phone	AY 	guess	IN
+phone	Z 	guess	IN
+phone	ER 	guess	IN
+phone	IH 	guess	IN
+phone	UW 	guess	AR
+phone	SH 	guess	CZ
+phone	UH 	guess	AR
+phone	OY 	guess	CZ
+phone	OW 	guess	AR
+RESULTS FOR IN 11.0 out of 24.0 :	45.8333333333
+********************
+CZ confusion:
+CZ: 48.00%
+AR: 52.00%
+IN: 0.00%
+********************
+AR confusion:
+CZ: 32.14%
+AR: 53.57%
+IN: 14.29%
+********************
+IN confusion:
+CZ: 37.50%
+AR: 16.67%
+IN: 45.83%
+********************
+OVERALL ACCURACY 49.3506493506
