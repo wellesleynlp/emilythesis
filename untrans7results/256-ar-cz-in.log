@@ -1,0 +1,29 @@
+Running Python2.7 (/opt/bin/python2.7) with the Tkinter library
+/opt/bin/python2.7 gmmTest.py /home/sravana/data/cslu_fae_corpus/npz /home/sravana/data/cslu_fae_corpus/models 256 full AR CZ IN
+Loaded compressed data for AR
+Loaded compressed data for CZ
+Loaded compressed data for IN
+Testing 25 files from CZ
+12 correct
+Testing 28 files from AR
+20 correct
+Testing 24 files from IN
+10 correct
+
+Accuracy 54.5454545455
+********************
+CZ confusion:
+CZ: 48.00%
+AR: 48.00%
+IN: 4.00%
+********************
+AR confusion:
+CZ: 17.86%
+AR: 71.43%
+IN: 10.71%
+********************
+IN confusion:
+CZ: 16.67%
+AR: 41.67%
+IN: 41.67%
+********************

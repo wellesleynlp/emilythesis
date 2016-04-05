@@ -1,0 +1,155 @@
+Running Python2.7 (/opt/bin/python2.7) with the Tkinter library
+/opt/bin/python2.7 phoneClassifier.py /home/sravana/data/cslu_fae_corpus/phones 2 full KO MA IN
+START 2
+Loaded compressed data for KO 3.69638776779
+Loaded compressed data for MA 6.40091586113
+Loaded compressed data for IN 2.15574598312
+BEGIN TRAINING KO
+Trained model for KO 85.7856400013
+BEGIN TRAINING MA
+Trained model for MA 205.173861027
+BEGIN TRAINING IN
+Trained model for IN 255.016992092
+********************
+TESTING MA
+phone	AA 	guess	MA
+phone	AW 	guess	MA
+phone	DH 	guess	MA
+phone	AY 	guess	MA
+phone	HH 	guess	MA
+phone	B 	guess	MA
+phone	JH 	guess	MA
+phone	ZH 	guess	IN
+phone	D 	guess	MA
+phone	NG 	guess	MA
+phone	TH 	guess	KO
+phone	IY 	guess	MA
+phone	CH 	guess	MA
+phone	AE 	guess	MA
+phone	EH 	guess	MA
+phone	G 	guess	MA
+phone	F 	guess	MA
+phone	AH 	guess	MA
+phone	K 	guess	MA
+phone	M 	guess	MA
+phone	L 	guess	KO
+phone	AO 	guess	MA
+phone	N 	guess	MA
+phone	IH 	guess	MA
+phone	S 	guess	MA
+phone	R 	guess	MA
+phone	EY 	guess	MA
+phone	T 	guess	MA
+phone	W 	guess	MA
+phone	V 	guess	MA
+phone	Y 	guess	MA
+phone	Z 	guess	MA
+phone	ER 	guess	MA
+phone	P 	guess	MA
+phone	UW 	guess	MA
+phone	SH 	guess	MA
+phone	UH 	guess	MA
+phone	OY 	guess	MA
+phone	OW 	guess	KO
+RESULTS FOR MA 54.0 out of 70.0 :	77.1428571429
+********************
+TESTING KO
+phone	AA 	guess	KO
+phone	W 	guess	MA
+phone	DH 	guess	MA
+phone	AY 	guess	MA
+phone	HH 	guess	MA
+phone	CH 	guess	MA
+phone	JH 	guess	MA
+phone	ZH 	guess	IN
+phone	D 	guess	MA
+phone	NG 	guess	MA
+phone	TH 	guess	KO
+phone	IY 	guess	MA
+phone	B 	guess	MA
+phone	AE 	guess	MA
+phone	EH 	guess	MA
+phone	G 	guess	MA
+phone	F 	guess	MA
+phone	AH 	guess	MA
+phone	K 	guess	KO
+phone	M 	guess	KO
+phone	L 	guess	KO
+phone	AO 	guess	MA
+phone	N 	guess	KO
+phone	IH 	guess	KO
+phone	S 	guess	MA
+phone	R 	guess	KO
+phone	EY 	guess	MA
+phone	T 	guess	MA
+phone	AW 	guess	MA
+phone	V 	guess	KO
+phone	Y 	guess	MA
+phone	Z 	guess	MA
+phone	ER 	guess	KO
+phone	P 	guess	MA
+phone	UW 	guess	MA
+phone	SH 	guess	MA
+phone	UH 	guess	MA
+phone	OY 	guess	MA
+phone	OW 	guess	KO
+RESULTS FOR KO 19.0 out of 43.0 :	44.1860465116
+********************
+TESTING IN
+phone	AA 	guess	KO
+phone	W 	guess	KO
+phone	DH 	guess	MA
+phone	AY 	guess	MA
+phone	HH 	guess	KO
+phone	CH 	guess	KO
+phone	JH 	guess	MA
+phone	ZH 	guess	IN
+phone	D 	guess	MA
+phone	NG 	guess	MA
+phone	TH 	guess	KO
+phone	IY 	guess	MA
+phone	B 	guess	MA
+phone	AE 	guess	MA
+phone	EH 	guess	MA
+phone	G 	guess	MA
+phone	F 	guess	MA
+phone	AH 	guess	IN
+phone	K 	guess	KO
+phone	M 	guess	MA
+phone	L 	guess	KO
+phone	AO 	guess	KO
+phone	N 	guess	IN
+phone	IH 	guess	IN
+phone	S 	guess	MA
+phone	R 	guess	MA
+phone	EY 	guess	MA
+phone	T 	guess	IN
+phone	AW 	guess	MA
+phone	V 	guess	MA
+phone	Y 	guess	MA
+phone	Z 	guess	MA
+phone	ER 	guess	MA
+phone	P 	guess	KO
+phone	UW 	guess	MA
+phone	SH 	guess	MA
+phone	UH 	guess	MA
+phone	OY 	guess	MA
+phone	OW 	guess	MA
+RESULTS FOR IN 4.0 out of 24.0 :	16.6666666667
+********************
+MA confusion:
+MA: 77.14%
+KO: 21.43%
+IN: 1.43%
+********************
+KO confusion:
+MA: 53.49%
+KO: 44.19%
+IN: 2.33%
+********************
+IN confusion:
+MA: 62.50%
+KO: 20.83%
+IN: 16.67%
+********************
+OVERALL ACCURACY 56.204379562
