@@ -113,7 +113,9 @@ def run_test(models, data):
             num_total += 1
             lang_total += 1
         for phone in phone_guesses:
-            pred_lang_phone = max(phone_guesses[phone].items(), key=lambda x:x[1])[0]
+            #pred_lang_phone = max(phone_guesses[phone].items(), key=lambda x:x[1])[0]
+            pred_lang_phone = sorted(phone_guesses[phone].items(), key=lambda x:x[1], reverse=True)[:3]
+
             print 'phone\t', phone, '\tguess\t', pred_lang_phone
         print 'RESULTS FOR', actual_lang, lang_correct, 'out of', lang_total, ':\t', lang_correct*100/lang_total
 
