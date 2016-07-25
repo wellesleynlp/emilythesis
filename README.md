@@ -10,7 +10,7 @@ Full write-up in pdf form can be found in the `writeup/` folder or in the [Welle
 
 #### `alignments/`
 - Contains forced alignents and transcriptions for the text-dependent classifier
-- The 7 subfolders correspond to ach of the 7 transcribed accents
+- The 7 subfolders correspond to each of the 7 transcribed accents
 - Simple transcriptions of speech files are organized by accent. The format is a `.csv` file compiled via releasing transcription tasks on Amazon Mechanical Turk, then personally cleaned up by the author. _*Note: errors still exist in some transcriptions._
 
 #### `trans-results/` and `untrans-results/`
