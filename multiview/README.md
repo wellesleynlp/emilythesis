@@ -9,6 +9,7 @@ NOTES
 - chance = *26%*
 OUTPUT:
 Stored predictions in `multiview/knn.{k}.predictions` for test points
+
 | k | Accuracy |
 ----|----------|
 | 2 | 37.17% |
@@ -22,7 +23,7 @@ Stored predictions in `multiview/knn.{k}.predictions` for test points
 | 10 | 41.12% |
 | 18 | 41.12% |
 | 19 | 41.12% |
-| 20 | *43.75%* |
+| 20 | ***43.75%*** |
 | 21 | 42.11% |
 | 25 | 40.79% |
 | 30 | 39.47% |
