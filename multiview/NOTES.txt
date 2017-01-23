@@ -1,4 +1,14 @@
 NOTES
 
-1/21
+1. TASK: Do Accent ID only using text features
+1/22
 - out of 4925 files, 3888 are 20sec long (324 KB), or ~79%
+- for 7 langs, # of 20sec files maintained (out of total files): 
+	- 922/1045 (88%) in train: /traintestsplit/7lang.trainlist.sorted.20sec
+	- 304/348 (87%) in test: /traintestsplit/7lang.testlist.sorted.20sec
+	- 20sec train/test split = 75/25!
+
+For future:
+- logistic regression - http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html
+- k neighbors regressor (?) - http://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsRegressor.html#sklearn.neighbors.KNeighborsRegressor
+- csr_matrix - https://docs.scipy.org/doc/scipy-0.18.1/reference/generated/scipy.sparse.csr_matrix.html

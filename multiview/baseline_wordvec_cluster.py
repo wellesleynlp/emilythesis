@@ -1,99 +1,113 @@
-"""Using only unigram vectors from transcriptions of accented speech, try to cluster and do accent ID. Clustering includes: kmeans"""
+""" Using only unigram vectors from transcriptions of accented speech, 
+    try to cluster and do accent ID. Clustering includes: 
+        - knn (method from knncluster.py in A5 from NLP class)
+    --------------------
+    Date created: 01/22/17
+    Date modified: 01/22/17
+"""
 
 import scipy
 import argparse
 from scipy.spatial.distance import cdist
+from scipy.stats import mode
 import codecs
 import time
-from collections import defaultdict
+# added
+from sklearn.feature_extraction.text import CountVectorizer
+from scipy.sparse.csr import csr_matrix
+import sys
 
 __author__='Emily Ahn'
 
-def kmeans(points, labels, k, maxiter):
-    """Cluster points (named with corresponding labels) into k groups.
-    Return a dictionary mapping each cluster ID (from 0 through k-1)
-    to a list of the labels of the points that belong to that cluster.
+def knn(trainpoints, traincats, testpoints, k):
+    """Given training data points
+    and a 1-d array of the corresponding categories of the points,
+    predict category for each test point,
+    using k nearest neighbors (with cosine distance).
+    Return a 1-d array of predicted categories.
     """
-    #TODO: fill in
+    predicted_cat = []
+    for point in testpoints:
+        dist = scipy.argsort(cdist(trainpoints,[point],'cosine').flatten())
+        closest = dist[:k]
+        close_cat = scipy.zeros(k, dtype=int)
+        for closest_i,i in enumerate(closest) :
+            close_cat[closest_i] = traincats[i]
+        #close_cat = [traincats[i] for i in closest]
+        cat = mode(close_cat)[0]
+        predicted_cat.append(cat)
+
+    return predicted_cat
+
     
-    # initialize first k points as clusters (centroids)
-    # cluster_dict = defaultdict(list)
-    # for cluster in range(k):
-    #     cluster_dict[cluster] = points[cluster]
-
-    # LOOP to account for maxiter
-    this_iter = 0
-    clusters = scipy.zeros(len(points))
-
-    while (this_iter < maxiter):
-        # get distances from point_i to each cluster, and assign it to the cluster with min dist
-        
-        if this_iter==0:
-            centroids = [points[i] for i in range(k)]
-
-        changed = False
-        for point_i,point in enumerate(points) :
-            dist = cdist(centroids,[point])
-
-            min_index = scipy.argmin(dist)
-
-            if min_index != clusters[point_i] :
-                clusters[point_i] = min_index
-                changed = True
-
-        if not changed:
-            break
-        else :
-            for centroid_i,centroid in enumerate(centroids) :
-                curr_cluster = []
-                for i in range(len(clusters)):
-                    if centroid_i == clusters[i]:
-                        curr_cluster.append(points[i])
-
-                if not curr_cluster :
-                    centroid[centroid_i] = points[centroid_i]
-                else :
-                    centroids[centroid_i] = scipy.mean(curr_cluster, axis=0)
-        
-        this_iter+=1
-
-    cluster_dict = defaultdict(list)
-    for cluster_i in range(k):
-        curr_cluster = []
-        
-        for point_i,point in enumerate(clusters) :
-            
-            if cluster_i == point :
-                curr_cluster.append(labels[point_i])
-
-        cluster_dict[cluster_i] = curr_cluster
-
-    return cluster_dict
-
-
-        
-def main():
-    # Do not modify
-    start = time.time()
-
-    parser = argparse.ArgumentParser(description='Cluster vectors with k-means.')
-    parser.add_argument('vecfile', type=str, help='name of vector file (exclude extension)')
-    parser.add_argument('k', type=int, help='number of clusters')
-    parser.add_argument('--maxiter', type=int, default=100, help='maximum number of k-means iterations')
-    args = parser.parse_args()
-
-    points = scipy.loadtxt(args.vecfile+'.vecs')
-    labels = codecs.open(args.vecfile+'.labels', 'r', 'utf8').read().split()
-
-    clusters = kmeans(points, labels, args.k, args.maxiter)
-    outfile = args.vecfile+'.cluster'+str(args.k)
-    with codecs.open(outfile, 'w', 'utf8') as o:
-        for c in clusters:
-            o.write('CLUSTER '+str(c)+'\n')
-            o.write(' '.join(clusters[c])+'\n')
-
-    print time.time()-start, 'seconds'
+def get_flist_labels(filelist, thesis_dir):
+    flist = []
+    labels = []
+    for item in filelist:
+        # filelist = list of filenames containing text info
+        # e.g. item='FAR00173'
+        lang = item[1:3]
+        flist.append(thesis_dir+'/alignments/'+lang+'/'+item+'.lab')
+        labels.append(get_langid(lang))
+    return (flist, labels)
+    
+def get_langid(lang):
+    ids = {'AR':0,'CZ':1,'FR':2,'HI':3,'IN':4,'KO':5,'MA':6}
+    return ids[lang]
 
 if __name__=='__main__':
-    # main()
-    pass
+
+    k = int(sys.argv[1])
+    
+    thesis_dir = '..'#'Desktop/thesis/emilythesis'
+    with open(thesis_dir+'/traintestsplit/7lang.trainlist.sorted.20sec', 'r') as reader:
+        trainlist = [line.replace('\n','') for line in reader.readlines()]
+    with open(thesis_dir+'/traintestsplit/7lang.testlist.sorted.20sec', 'r') as reader:
+        testlist = [line.replace('\n','') for line in reader.readlines()]
+                
+    train_filelist, traincats = get_flist_labels(trainlist, '..')
+    test_filelist, testcats = get_flist_labels(testlist, '..')
+    
+    all_filelist = train_filelist
+    all_filelist.extend(test_filelist)
+
+    
+    cv = CountVectorizer(input='filename') #optional param: stop_words='english'
+    td_matrix = cv.fit_transform(all_filelist).toarray()
+    # dimensions = 1226 (# train+test files) x 4182 (dimensions)
+    # without toarray, it's <class 'scipy.sparse.csr.csr_matrix'>
+    #print len(cv.get_feature_names())
+    
+    trainpoints = td_matrix[:len(traincats)]
+    testpoints = td_matrix[-len(testcats):]
+    
+    # run knn classifier
+    predictions = knn(trainpoints, traincats, testpoints, k)
+    
+    # write actual category, predict category, and text of test points, and compute accuracy
+    o = codecs.open('knn.'+str(k)+'.predictions', 'w', 'utf8')
+    o.write('ACTUAL,PREDICTED,CORRECT?,TEXT\n')
+    o.write('{AR:0,CZ:1,FR:2,HI:3,IN:4,KO:5,MA:6}\n')
+ 
+    numcorrect = 0.
+    for i, testcat in enumerate(testcats):
+
+        o.write(str(testcats[i]))
+        o.write(',')
+        o.write(str(predictions[i]))
+        o.write(',')
+        if testcats[i] == predictions[i]:
+            numcorrect += 1
+            o.write('CORRECT,')
+        else:
+            o.write('WRONG,')
+        o.write(test_filelist[i]+'\n')
+
+    print 'Stored predictions in knn.'+str(k)+'.predictions', 'for test points'
+    acc = numcorrect*100/len(testcats)
+    print 'Accuracy: {0:.2f}%'.format(acc)
+    
+    
+    
+    
+    
