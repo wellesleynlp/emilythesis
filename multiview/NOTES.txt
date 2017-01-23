@@ -1,0 +1,4 @@
+NOTES
+
+1/21
+- out of 4925 files, 3888 are 20sec long (324 KB), or ~79%
