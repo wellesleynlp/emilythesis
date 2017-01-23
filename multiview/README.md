@@ -1,5 +1,3 @@
-NOTES
-
 ## 1. TASK: Do Accent ID only using text features
 1/22
 - for 7 langs, # of 20sec files maintained (out of total files): 
@@ -7,8 +5,9 @@ NOTES
 	- 304/348 (87%) in test: `/traintestsplit/7lang.testlist.sorted.20sec`
 	- 20sec train/test split = 75/25!
 - chance = *26%* (percentage of Hindi test files--79/304)
+
 OUTPUT:
-Stored predictions in `multiview/knn.{k}.predictions` for test points
+Stored predictions in `multiview/knn_predictions_170123/knn.{k}.predictions` for test points
 
 | k | Accuracy |
 ----|----------|
