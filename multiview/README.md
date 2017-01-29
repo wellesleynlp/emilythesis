@@ -16,13 +16,16 @@ Overall Accuracy: *_61.18%_*
 
 - general analysis of test set: # of test files and % out of whole test set
 
-AR: 25 (8.2%)
-CZ: 23 (7.6%)
-FR: 62 (20.4%)
-HI: 79 (26.0%)
-IN: 21 (6.9%)
-KO: 36 (11.8%)
-MA: 58 (19.1%)
+AR: 25 (8.2%)\n
+CZ: 23 (7.6%)\n
+FR: 62 (20.4%)\n
+HI: 79 (26.0%)\n
+IN: 21 (6.9%)\n
+KO: 36 (11.8%)\n
+MA: 58 (19.1%)\n
+
+- removing stop words: overall accuracy was the exact same (61.18%), but notably Korean did worse while Czech and Indonesian did better. Results in logreg.nostop*
+
 
 1/22
 - for 7 langs, # of 20sec files maintained (out of total files): 

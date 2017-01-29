@@ -76,7 +76,8 @@ if __name__=='__main__':
     all_filelist.extend(test_filelist)
 
     
-    cv = CountVectorizer(input='filename') #optional param: stop_words='english'
+    #cv = CountVectorizer(input='filename') #optional param: stop_words='english'
+    cv = CountVectorizer(input='filename',stop_words='english')
     td_matrix = cv.fit_transform(all_filelist).toarray()
     # dimensions = 1226 (# train+test files) x 4182 (dimensions)
     # without toarray, it's <class 'scipy.sparse.csr.csr_matrix'>
@@ -99,7 +100,7 @@ if __name__=='__main__':
     
     # write actual category, predict category, and text of test points, and compute accuracy
     #o = codecs.open('knn.'+str(k)+'.predictions', 'w', 'utf8')4
-    o = codecs.open('logreg.predictions', 'w', 'utf8')
+    o = codecs.open('logreg.nostop.predictions', 'w', 'utf8')
     o.write('ACTUAL,PREDICTED,CORRECT?,TEXT\n')
     o.write('{AR:0,CZ:1,FR:2,HI:3,IN:4,KO:5,MA:6}\n')
  
