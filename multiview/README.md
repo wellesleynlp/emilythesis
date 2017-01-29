@@ -3,6 +3,7 @@
 - used [logistic regression](http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html) from sklearn 
 
 Overall Accuracy: *_61.18%_*
+
 | lang | acc | acc/total\_acc / rel # test files
 ----|-----|------------|
 |AR | 32.00% | 1.07 |
@@ -15,13 +16,13 @@ Overall Accuracy: *_61.18%_*
 
 - general analysis of test set: # of test files and % out of whole test set
 
-	AR: 25 (8.2%)
-	CZ: 23 (7.6%)
-	FR: 62 (20.4%)
-	HI: 79 (26.0%)
-	IN: 21 (6.9%)
-	KO: 36 (11.8%)
-	MA: 58 (19.1%)
+AR: 25 (8.2%)
+CZ: 23 (7.6%)
+FR: 62 (20.4%)
+HI: 79 (26.0%)
+IN: 21 (6.9%)
+KO: 36 (11.8%)
+MA: 58 (19.1%)
 
 1/22
 - for 7 langs, # of 20sec files maintained (out of total files): 
