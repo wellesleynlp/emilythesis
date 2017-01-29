@@ -1,18 +1,20 @@
 ## 1. TASK: Do Accent ID only using text features
 1/29
 - used [logistic regression](http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html) from sklearn 
+
 Overall Accuracy: *_61.18%_*
 | lang | acc | acc/total\_acc / rel # test files
 ----|-----|------------|
 |AR | 32.00% | 1.07 |
-|CZ | 21.74% | _0.79_ |
+|CZ | 21.74% | _**0.79**_ |
 |FR | 75.81% | 1.03 |
 |HI | 77.22% | 0.82 |
-|IN | 38.10% | _1.52_ |
+|IN | 38.10% | _**1.52**_ |
 |KO | 50.00% | 1.17 |
 |MA | 67.24% | 0.97 |
 
 - general analysis of test set: # of test files and % out of whole test set
+
 	AR: 25 (8.2%)
 	CZ: 23 (7.6%)
 	FR: 62 (20.4%)
@@ -34,21 +36,13 @@ Stored predictions in `multiview/knn_predictions_170123/knn.{k}.predictions` for
 | k | Accuracy |
 ----|----------|
 | 2 | 37.17% |
-| 3 | 39.14% |
-| 4 | 39.47% |
 | 5 | 41.12% |
-| 6 | 39.47% |
-| 7 | 40.13% |
-| 8 | 41.45% |
-| 9 | 41.78% |
 | 10 | 41.12% |
-| 18 | 41.12% |
 | 19 | 41.12% |
 | 20 | ***43.75%*** |
 | 21 | 42.11% |
 | 25 | 40.79% |
 | 30 | 39.47% |
-| 40 | 40.79% |
 
 -----------------------
 MISC:
