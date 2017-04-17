@@ -3,7 +3,7 @@
 - used [CCA](http://scikit-learn.org/stable/modules/generated/sklearn.cross_decomposition.CCA.html) from sklearn
 - trained (fit & transform) on SPEECH (concatenated PLP features) and TEXT (from CountVectorizer)
 - saved CCA representation to /home/sravana/data/cslu_fae_corpus/pkl/
-TODO: apply CCA representation (predict()/score()?) on test data
+- STATUS: bug when scoring (says CCA did not fit yet)
 
 ## 1. TASK: Do Accent ID only using text features
 1/29
