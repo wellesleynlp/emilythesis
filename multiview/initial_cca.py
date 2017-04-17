@@ -95,7 +95,7 @@ if __name__=='__main__':
 
     print 'LOADED SP', time.time() - start
 
-    cca = CCA()
+    cca = CCA(n_components=2)
     new = cca.fit_transform(trainpoints_sp,trainpoints_text)
     print 'CCA FIT_TRANSFORM', new[:10]
 
