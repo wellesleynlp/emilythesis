@@ -3,7 +3,7 @@ __author__='Emily Ahn and Sravana Reddy'
 """ Accent classification using separate GMMs for each vowel using formants.
     3-way classification between: Arabic, Czech, Indonesian
     Date created: 12.09.2015
-    Date modified: 12.10.2015
+    Date modified: 04.11.2016
     TO-DO: Test by file, create look-up dictionary of file and time.
             Current version only tests by vowel.
 """
@@ -53,8 +53,8 @@ def split_data(all_data, time_split):
     return (train_data, test_data)
     
 # for 1 vowel only, returns 1 GMM
-def train_model(formants_list):
-    g = GMM(n_components=1,covariance_type='full')
+def train_model(formants_list, n_comp):
+    g = GMM(n_components=n_comp,covariance_type='full')
     g.fit(formants_list)
     return g
     
@@ -63,6 +63,7 @@ def apply_models(model, speech_samples):
     return np.sum(model.score(speech_samples))
 
 if __name__=='__main__':
+    n_comp = sys.argv[1]
     lang_list = ['AR', 'CZ', 'IN']
     # AR: out of 2413 seconds, split train-test at 75%, or at 1809sec
     # CZ: out of 2316 seconds, split train-test at 75%, or at 1737sec
@@ -76,7 +77,8 @@ if __name__=='__main__':
         models[lang] = {}
         
         for vowel in lang_data['AR'].keys():
-            models[lang][vowel] = train_model(train_test[lang][0][vowel])
+            models[lang][vowel] = train_model(train_test[lang][0][vowel], n_comp)
+        print "Trained model for", lang
     
     # TEST (for now) individual vowel's samples at a time,
     logprobs = defaultdict(dict)

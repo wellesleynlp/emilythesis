@@ -1,0 +1,89 @@
+Running Python2.7 (/opt/bin/python2.7) with the Tkinter library
+/opt/bin/python2.7 gmmTest.py /home/sravana/data/cslu_fae_corpus/npz /home/sravana/data/cslu_fae_corpus/models 512 full AR CZ IN HI MA FR KO
+Loaded compressed data for AR
+Loaded compressed data for CZ
+Loaded compressed data for IN
+Loaded compressed data for HI
+Loaded compressed data for MA
+Loaded compressed data for FR
+Loaded compressed data for KO
+Testing 71 files from FR
+31 correct
+Testing 70 files from MA
+32 correct
+Testing 43 files from KO
+5 correct
+Testing 25 files from CZ
+0 correct
+Testing 28 files from AR
+0 correct
+Testing 87 files from HI
+68 correct
+Testing 24 files from IN
+0 correct
+
+Accuracy 39.0804597701
+********************
+FR confusion:
+FR: 43.66%
+MA: 19.72%
+KO: 0.00%
+CZ: 0.00%
+AR: 0.00%
+HI: 36.62%
+IN: 0.00%
+********************
+MA confusion:
+FR: 17.14%
+MA: 45.71%
+KO: 1.43%
+CZ: 1.43%
+AR: 0.00%
+HI: 34.29%
+IN: 0.00%
+********************
+KO confusion:
+FR: 13.95%
+MA: 27.91%
+KO: 11.63%
+CZ: 0.00%
+AR: 0.00%
+HI: 46.51%
+IN: 0.00%
+********************
+CZ confusion:
+FR: 24.00%
+MA: 8.00%
+KO: 0.00%
+CZ: 0.00%
+AR: 0.00%
+HI: 68.00%
+IN: 0.00%
+********************
+AR confusion:
+FR: 10.71%
+MA: 10.71%
+KO: 0.00%
+CZ: 0.00%
+AR: 0.00%
+HI: 78.57%
+IN: 0.00%
+********************
+HI confusion:
+FR: 6.90%
+MA: 13.79%
+KO: 1.15%
+CZ: 0.00%
+AR: 0.00%
+HI: 78.16%
+IN: 0.00%
+********************
+IN confusion:
+FR: 8.33%
+MA: 45.83%
+KO: 0.00%
+CZ: 0.00%
+AR: 0.00%
+HI: 45.83%
+IN: 0.00%
+********************
