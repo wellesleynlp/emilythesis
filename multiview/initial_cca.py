@@ -1,25 +1,16 @@
-""" Use CCA 
+""" Use CCA
     - script modified from baseline_wordvec_cluster.py
     --------------------
     Date created: 04/13/17
     Date modified: 04/16/17
 """
 
-# import scipy
-# import argparse
-# from scipy.spatial.distance import cdist
-# from scipy.stats import mode
-# import codecs
-import time
-
-from sklearn.feature_extraction.text import CountVectorizer
-# from scipy.sparse.csr import csr_matrix
 import sys, os
-# from sklearn import linear_model
-# from sklearn.metrics import confusion_matrix
+import time
 import numpy as np
-
+from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.cross_decomposition import CCA
+#import cPickle
 
 __author__='Emily Ahn'
    
@@ -81,7 +72,7 @@ if __name__=='__main__':
     trainpoints_sp = []
     testpoints_sp = []
 
-    data = load_data(thesis_dir+'/cslu_fae_corpus/npz',langlist)
+    data = load_data('/home/sravana/data/cslu_fae_corpus/npz',langlist)
 
     for trainfile in trainlist:
         lang = trainfile[1:3]
@@ -97,6 +88,19 @@ if __name__=='__main__':
 
     cca = CCA(n_components=2)
     new = cca.fit_transform(trainpoints_sp,trainpoints_text)
-    print 'CCA FIT_TRANSFORM', new[:10]
+    
+    print 'CCA FIT_TRANSFORM', time.time() - start
+    
+    pkl_path = '/home/sravana/data/cslu_fae_corpus/pkl/cca_0416.'
+    cca.x_weights_.dump(pkl_path+'x_weights')
+    cca.y_weights_.dump(pkl_path+'y_weights')
+    cca.x_loadings_.dump(pkl_path+'x_loadings')
+    cca.y_loadings_.dump(pkl_path+'y_loadings')
+    cca.x_scores_.dump(pkl_path+'x_scores')
+    cca.y_scores_.dump(pkl_path+'y_scores')
+    cca.x_rotations_.dump(pkl_path+'x_rotations')
+    cca.y_rotations_.dump(pkl_path+'y_rotations')
+    
+    print 'PICKLED'
 
     print 'DONE', time.time() - start
