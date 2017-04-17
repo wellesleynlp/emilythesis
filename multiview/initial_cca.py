@@ -85,22 +85,38 @@ if __name__=='__main__':
     # print 'TEST_SP SHAPE', np.array(testpoints_sp).shape    
 
     print 'LOADED SP', time.time() - start
-
+    
+    pkl_path = '/home/sravana/data/cslu_fae_corpus/pkl/cca_0417.'
+    def save_cca():
+        cca = CCA(n_components=2)
+        #new = cca.fit_transform(trainpoints_sp,trainpoints_text)
+        cca.fit(trainpoints_sp,trainpoints_text)
+        
+        cca.x_weights_.dump(pkl_path+'x_weights')
+        cca.y_weights_.dump(pkl_path+'y_weights')
+        cca.x_loadings_.dump(pkl_path+'x_loadings')
+        cca.y_loadings_.dump(pkl_path+'y_loadings')
+        cca.x_scores_.dump(pkl_path+'x_scores')
+        cca.y_scores_.dump(pkl_path+'y_scores')
+        cca.x_rotations_.dump(pkl_path+'x_rotations')
+        cca.y_rotations_.dump(pkl_path+'y_rotations')
+    
+    save_cca()
+    print 'CCA FIT_TRANSFORM & SAVED', time.time() - start
+    
     cca = CCA(n_components=2)
-    new = cca.fit_transform(trainpoints_sp,trainpoints_text)
+    cca.x_weights_ = np.load(pkl_path+'x_weights')
+    cca.y_weights_ = np.load(pkl_path+'y_weights')
+    cca.x_loadings_ = np.load(pkl_path+'x_loadings')
+    cca.y_loadings_ = np.load(pkl_path+'y_loadings')
+    cca.x_scores_ = np.load(pkl_path+'x_scores')
+    cca.y_scores_ = np.load(pkl_path+'y_scores')
+    cca.x_rotations_ = np.load(pkl_path+'x_rotations')
+    cca.y_rotations_ = np.load(pkl_path+'y_rotations')
+    print 'CCA LOADED', time.time() - start
     
-    print 'CCA FIT_TRANSFORM', time.time() - start
-    
-    pkl_path = '/home/sravana/data/cslu_fae_corpus/pkl/cca_0416.'
-    cca.x_weights_.dump(pkl_path+'x_weights')
-    cca.y_weights_.dump(pkl_path+'y_weights')
-    cca.x_loadings_.dump(pkl_path+'x_loadings')
-    cca.y_loadings_.dump(pkl_path+'y_loadings')
-    cca.x_scores_.dump(pkl_path+'x_scores')
-    cca.y_scores_.dump(pkl_path+'y_scores')
-    cca.x_rotations_.dump(pkl_path+'x_rotations')
-    cca.y_rotations_.dump(pkl_path+'y_rotations')
-    
-    print 'PICKLED'
+    print 'SCORE', cca.score(testpoints_sp, testcats)
+    # ERROR WITH SCORE:
+    # sklearn.utils.validation.NotFittedError: This CCA instance is not fitted yet. Call 'fit' with appropriate arguments before using this method.
 
     print 'DONE', time.time() - start
