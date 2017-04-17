@@ -1,3 +1,7 @@
+## 2. TASK: Try initial run of CCA on speech + text
+4/16
+
+
 ## 1. TASK: Do Accent ID only using text features
 1/29
 - used [logistic regression](http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html) from sklearn 
