@@ -2,7 +2,7 @@
     - script modified from baseline_wordvec_cluster.py
     --------------------
     Date created: 04/13/17
-    Date modified: 04/16/17
+    Date modified: 04/19/17
 """
 
 import sys, os
@@ -101,18 +101,19 @@ if __name__=='__main__':
         cca.x_rotations_.dump(pkl_path+'x_rotations')
         cca.y_rotations_.dump(pkl_path+'y_rotations')
     
-    save_cca()
-    print 'CCA FIT_TRANSFORM & SAVED', time.time() - start
+    #save_cca()
+    #print 'CCA FIT_TRANSFORM & SAVED', time.time() - start
     
     cca = CCA(n_components=2)
-    cca.x_weights_ = np.load(pkl_path+'x_weights')
-    cca.y_weights_ = np.load(pkl_path+'y_weights')
-    cca.x_loadings_ = np.load(pkl_path+'x_loadings')
-    cca.y_loadings_ = np.load(pkl_path+'y_loadings')
-    cca.x_scores_ = np.load(pkl_path+'x_scores')
-    cca.y_scores_ = np.load(pkl_path+'y_scores')
-    cca.x_rotations_ = np.load(pkl_path+'x_rotations')
-    cca.y_rotations_ = np.load(pkl_path+'y_rotations')
+    #cca.x_weights_ = np.load(pkl_path+'x_weights')
+    #cca.y_weights_ = np.load(pkl_path+'y_weights')
+    #cca.x_loadings_ = np.load(pkl_path+'x_loadings')
+    #cca.y_loadings_ = np.load(pkl_path+'y_loadings')
+    #cca.x_scores_ = np.load(pkl_path+'x_scores')
+    #cca.y_scores_ = np.load(pkl_path+'y_scores')
+    #cca.x_rotations_ = np.load(pkl_path+'x_rotations')
+    #cca.y_rotations_ = np.load(pkl_path+'y_rotations')
+    cca.fit_transform(trainpoints_sp,trainpoints_text)
     print 'CCA LOADED', time.time() - start
     
     print 'SCORE', cca.score(testpoints_sp, testcats)
